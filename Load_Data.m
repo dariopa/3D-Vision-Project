@@ -9,7 +9,7 @@ imtool close all;	% Close all figure windows created by imtool.
 addpath(genpath('NIFTI_TOOLBOX'));
 
 %% Define MyPath to our local Raw Data
-MyPath = 'C:\Users\dario\Dropbox\3D Vision\Data';
+MyPath = 'Data';
 % MyPath = ;  % Define Cornels working folder
 % MyPath = ;  % Define Michelles working folder
 

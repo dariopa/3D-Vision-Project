@@ -20,5 +20,6 @@ view_nii(A);
 
 %% view single image
 figure;
-image(A.img(:,:,5));
+% frame 15, at depth 5
+image(A.img(:,:,5,15)/8); 
 colormap gray;

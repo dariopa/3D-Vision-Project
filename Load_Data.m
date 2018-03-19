@@ -9,9 +9,7 @@ imtool close all;	% Close all figure windows created by imtool.
 addpath(genpath('NIFTI_TOOLBOX'));
 
 %% Define MyPath to our local Raw Data
-MyPath = 'Data';
-% MyPath = ;  % Define Cornels working folder
- MyPath = 'C:\Users\Saphi\Desktop\8th Semester\3D Vision\project\training';  % Define Michelles working folder
+MyPath = 'Data'; 
 
 %% Import Nifti Images
 A = load_nii(fullfile([MyPath, '\patient001\patient001_4d.nii.gz']));

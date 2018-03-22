@@ -369,7 +369,7 @@ def load_and_maybe_process_data(input_folder,
 
 if __name__ == '__main__':
 
-    input_folder = 'Data/patient001'
+    input_folder = 'Data'
     preprocessing_folder = 'preproc_data'
     if not os.path.isdir(preprocessing_folder):
         os.makedirs(preprocessing_folder)

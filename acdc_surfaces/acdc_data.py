@@ -208,6 +208,7 @@ def prepare_data(input_folder, output_file, mode, size, target_resolution, start
             file_mask = file_base + '_gt.nii.gz'
             folder_path = os.path.dirname(file)
 
+
             patient_id = folder_path[-3:]
 
 
@@ -219,7 +220,7 @@ def prepare_data(input_folder, output_file, mode, size, target_resolution, start
             systole_frame = int(infos['ES'])
             diastole_frame = int(infos['ED'])
 
-            file_base = file.split('.')[0]
+            # file_base = file.split('.')[0]                # COMMENTED THIS LINE!!!!!!
             frame = int(file_base.split('frame')[-1])
 
 
@@ -480,5 +481,5 @@ if __name__ == '__main__':
     end_slice = 5
 
     # d=load_and_maybe_process_data(input_folder, preprocessing_folder, '3D', (116,116,28), (2.5,2.5,5))
-    d=load_and_maybe_process_data(input_folder, preprocessing_folder, '2D', (212,212), (1.36719, 1.36719), start_slice, end_slice, split_test_train=False)
+    d=load_and_maybe_process_data(input_folder, preprocessing_folder, '2D', (212,212), (1.36719, 1.36719), start_slice, end_slice, force_overwrite=True, split_test_train=False)
 

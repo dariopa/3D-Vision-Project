@@ -4,3 +4,4 @@
 /__pycache__/
 /preproc*
 /acdc_surfaces/src/
+/acdc_surfaces/__pycache__/

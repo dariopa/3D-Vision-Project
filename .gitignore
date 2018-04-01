@@ -1,6 +1,6 @@
 /.vscode/
 /Data/
-/X_train*
+/X_train_unaligned/
 /Link*
 /__pycache__/
 /preproc*

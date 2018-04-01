@@ -1,5 +1,6 @@
 /.vscode/
 /Data/
+/X_train*
 /Link*
 /__pycache__/
 /preproc*

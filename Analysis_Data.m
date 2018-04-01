@@ -12,11 +12,10 @@ addpath(genpath('NIFTI_TOOLBOX'));
 MyPath = 'Data'; 
 
 %% Import Nifti Images
-A = load_nii(fullfile([MyPath, '\patient001\patient001_4d.nii.gz']));
 B = load_nii(fullfile([MyPath, '\patient001\patient001_frame12.nii.gz']));
 
 %% view
-view_nii(A);
+view_nii(B);
 
 %% view single image
 figure;

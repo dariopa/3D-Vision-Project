@@ -1,4 +1,8 @@
 /.vscode/
 /Data/
+/X_train_unaligned/
 /Link*
 /__pycache__/
+/preproc*
+/acdc_surfaces/src/
+/acdc_surfaces/__pycache__/

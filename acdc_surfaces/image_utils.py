@@ -33,13 +33,17 @@ def convert_to_uint8(image):
 
 def normalise_image(image):
     '''
-    make image zero mean and unit standard deviation
+    # make image zero mean and unit standard deviation
+    normalise 98% to [0,1]
     '''
-
-    img_o = np.float32(image.copy())
-    m = np.mean(img_o)
-    s = np.std(img_o)
-    return np.divide((img_o - m), s)
+    tmp = np.float32(image.copy())
+    tmp = (tmp - tmp.min()) / (np.percentile(tmp, 98) - tmp.min())
+    tmp[tmp > 1] = 1
+    return tmp
+   # img_o = np.float32(image.copy())
+   # m = np.mean(img_o)
+   # s = np.std(img_o)
+   # return np.divide((img_o - m), s)
 
 def normalise_images(X):
     '''

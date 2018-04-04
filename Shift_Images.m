@@ -1,4 +1,4 @@
-%% Alignment of images towards centre of image.  
+%% Alignment of images towards centre of image. 
 
 clc;	% Clear command window.
 clear;	% Delete all variables.
@@ -10,3 +10,6 @@ addpath(genpath('NIFTI_TOOLBOX'));
 
 %% Define MyPath to our local Raw Data
 MyPath = 'Data'; 
+
+I = imread('trial.jpg');
+imshow(I);

@@ -13,7 +13,8 @@ addpath(genpath('snakes'));
 MyPath = 'Data'; 
 
 %% read hdf5 file
-HDF5_Reading
+filename = 'Data/column_full_UKBB_data_2D_size_212_212_res_1.36719_1.36719_sl_2_5_onlytrain.hdf5';
+MASKS = h5read(filename,'/masks_train');
 
 no_img = size(MASKS,3);
 

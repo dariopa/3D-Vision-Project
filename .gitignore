@@ -1,5 +1,6 @@
 /.vscode/
 /Data/
+/.idea/
 /X_train_unaligned/
 /Link*
 /__pycache__/

@@ -14,7 +14,7 @@ MASKS = h5read(filename,'/masks_train');
 FirstPic = M(:,:,19);
 FirstMask = MASKS(:,:,19);
 
-figure;
-imshow(FirstPic,[]);
-figure;
-imshow(FirstMask,[]);
+%figure;
+%imshow(FirstPic,[]);
+%figure;
+%imshow(FirstMask,[]);

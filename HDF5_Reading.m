@@ -18,3 +18,33 @@ figure;
 imshow(FirstPic,[]);
 figure;
 imshow(FirstMask,[]);
+
+%%From data.py
+%img_file = file_name[idx] + "_MRIMAT.mat"
+
+StorePath = 'MRI_Export\';
+if ~isdir(StorePath)
+    mkdir(StorePath);
+end
+
+if ~isempty(dir(fullfile(StorePath, '/*.mat')))
+    which_dir = StorePath;
+    dinfo = dir(which_dir);
+    dinfo([dinfo.isdir]) = [];   %skip directories
+    filenames = fullfile(which_dir, {dinfo.name});
+    delete( filenames{:} )
+end
+
+%%% Export mit Nummerierung
+
+%%%Export ALL
+%for k=1:size(M,3)
+for k=1:4
+FileName = strcat(StorePath,'image', num2str(k), '_MRIMAT.mat');
+disp(FileName);
+image_data = M(:,:,k);
+save(FileName,'image_data');
+end
+
+
+

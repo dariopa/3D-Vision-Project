@@ -14,9 +14,6 @@ StorePath_MRI = 'MRI_Aligned\';
 filePattern_GT = fullfile(LoadPath_GT, '*.png');
 filePattern_MRI = fullfile(LoadPath_MRI, '*.mat');
 
-%% Add library for NIFTI_TOOLBOX
-addpath(genpath('NIFTI_TOOLBOX'));
-
 %% Define MyPath to our local Raw Data
 % Check path for ground truth data
 if ~isdir(LoadPath_GT)
@@ -100,12 +97,17 @@ for k = 1:length(Files_GT)
     xlabel('Centroid in thresholded image');
     hold off
 
-    %Print coordinates of centroid:
+    % Print coordinates of centroid:
     fprintf('Centroid of myocardium:\n')
     disp(stat.Centroid)
-
+    
+    % Calculate shift of images:
+    x_mid = int16(row/2);
+    y_mid = int16(col/2);
+    
+    % Plot shifted image
     subplot(2,2,4)
-    img = imtranslate(img, [row/2,col/2]);
+    img = imtranslate(img, [x_mid-stat.Centroid(1), y_mid-stat.Centroid(2)]);
     imshow(img);
     xlabel('Shifted image')
 end

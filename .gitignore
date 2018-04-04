@@ -1,8 +1,8 @@
 /.vscode/
 /Data/
 /.idea/
-/MRI_Export/
-/Ground_Truth_Export/
+/MRI_*/
+/GT_*/
 /unaligned_snakes/
 /X_train_unaligned/
 /Link*

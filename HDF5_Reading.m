@@ -34,7 +34,7 @@ imshow(FirstMask,[]);
 %%From data.py
 %img_file = file_name[idx] + "_MRIMAT.mat"
 
-StorePath = 'MRI_Export\';
+StorePath = 'MRI_Unaligned\';
 if ~isdir(StorePath)
     mkdir(StorePath);
 end
@@ -53,8 +53,6 @@ else
     export_size = 4;
 end
 
-export_size
-
 for k=1:export_size
 FileName = strcat(StorePath,'image', num2str(k), '_MRIMAT.mat');
 image_data = M(:,:,k);
@@ -65,7 +63,7 @@ end
 %%% EXPORT GROUND TRUTH IMAGES MIT NUMMERIERUNG %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-pngPath = 'Ground_Truth_Export\';
+pngPath = 'GT_Unaligned\';
 if ~isdir(pngPath)
     mkdir(pngPath);
 end

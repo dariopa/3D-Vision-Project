@@ -3,6 +3,7 @@
 /.idea/
 /MRI_Export/
 /Ground_Truth_Export/
+/unaligned_snakes/
 /X_train_unaligned/
 /Link*
 /__pycache__/

@@ -2,6 +2,7 @@
 /Data/
 /.idea/
 /MRI_Export/
+/Ground_Truth_Export/
 /X_train_unaligned/
 /Link*
 /__pycache__/

@@ -4,7 +4,7 @@ clc;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% CHANGE THIS IF YOU WANT TO EXPORT THE WHOLE DATA SET %%%%
-export_all = 0      % 1 - Export All
+export_all = 1;     % 1 - Export All
                     % 0 - Export 4 images
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

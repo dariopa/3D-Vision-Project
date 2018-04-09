@@ -1,10 +1,8 @@
 /.vscode/
 /Data/
 /.idea/
-/MRI_*/
-/GT_*/
-/unaligned_snakes/
-/X_train_unaligned/
+/*_Unaligned/
+/*_Aligned/
 /Link*
 /__pycache__/
 /preproc*

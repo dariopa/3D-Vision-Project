@@ -9,11 +9,25 @@ imtool close all;	% Close all figure windows created by imtool.
 addpath(genpath('NIFTI_TOOLBOX'));
 addpath(genpath('snakes'));
 
-%% Define MyPath to our local Raw Data
-MyPath = 'Data'; 
+%% Define pathes
+MyPath = 'Data\'; 
+StorePath = 'SURF_Unaligned\';
+
+% Create Store Folder if not already existing
+if ~isdir(StorePath)
+    mkdir(StorePath);
+end
+% When running this code, delete all content in that folder
+if ~isempty(dir(fullfile(StorePath, '/*.png')))
+    which_dir = StorePath;
+    dinfo = dir(which_dir);
+    dinfo([dinfo.isdir]) = [];   %skip directories
+    filenames = fullfile(which_dir, {dinfo.name});
+    delete( filenames{:} )
+end
 
 %% read hdf5 file
-filename = 'Data/column_full_UKBB_data_2D_size_212_212_res_1.36719_1.36719_sl_2_5_onlytrain.hdf5';
+filename = fullfile(MyPath, 'column_full_UKBB_data_2D_size_212_212_res_1.36719_1.36719_sl_2_5_onlytrain.hdf5');
 MASKS = h5read(filename,'/masks_train');
 
 no_img = size(MASKS,3);
@@ -35,7 +49,7 @@ for i = 1 : no_img
     
     Options=struct;
     Options.Iterations=1000;
-    %Options.Verbose=true;
+    Options.Verbose=false;
     Options.nPoints=50;
     Options.Alpha=0.2;
     Options.Beta=1;
@@ -47,11 +61,7 @@ for i = 1 : no_img
     
     
     %% save information
-    StorePath = 'unaligned_snakes\';
-    if ~isdir(StorePath)
-        mkdir(StorePath);
-    end
-    filepath = 'unaligned_snakes\image';
+    filepath = fullfile(StorePath,'image');
     filepath = strcat(filepath,num2str(i));
     
     % save coordinates

@@ -60,7 +60,7 @@ for k = 1:length(Files_GT)
     
     % run snakes
     [O,J] = Snake2D(I, P, Options);
-    
+    hold off;
     imshow(I); 
     hold on;
     % visualize snakes

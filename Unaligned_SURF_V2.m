@@ -11,7 +11,7 @@ addpath(genpath('snakes'));
 %% Options for snakes
 Options=struct;
 Options.Verbose=false;
-Options.Iterations=600;
+Options.Iterations=1000;
 Options.nPoints=50;
 Options.Wedge=2;
 Options.Wline=0;

@@ -102,7 +102,7 @@ for k = 1:length(Files_GT)
     % generate thresholded image
     img = I;
     img(img < 255) = 0; 
-    img = bwareaopen(img,2000);
+    img = bwareaopen(img,500);
 
     % find the centroid of the objects (use regionprops() ) & plot the original image with the centroid
     stat=regionprops(img,'Centroid');
@@ -122,7 +122,7 @@ for k = 1:length(Files_GT)
     surf = load(Filename_SURF);
     surf = surf(2:end,:);
     surf_y = surf(:,1); % ATTENTION HERE! FIRST COLUMN IS Y-POSITION!
-    surf_x = surf(:,2); % ATTENTION HERE! SECOND COLUMN IS Yx-POSITION!
+    surf_x = surf(:,2); % ATTENTION HERE! SECOND COLUMN IS X-POSITION!
     surf_shifted_x = surf_x + cast(repelem(x_mid-stat.Centroid(1), length(surf))','double');
     surf_shifted_y = surf_y + cast(repelem(y_mid-stat.Centroid(2), length(surf))','double');
     
@@ -136,7 +136,7 @@ for k = 1:length(Files_GT)
     fileID = fopen(coordname,'w');
     fprintf(fileID,'%d %d\n',length(surf),length(surf));
     for j=1:length(surf)
-        fprintf(fileID,'%f %f\n',surf_shifted_x(j),surf_shifted_y(j));
+        fprintf(fileID,'%f %f\n',surf_shifted_y(j),surf_shifted_x(j));
     end
     fclose(fileID);
         

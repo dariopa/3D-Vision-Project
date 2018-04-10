@@ -39,7 +39,7 @@ disp('doing preliminary round of snakes...');
 for i = 1 : no_img
     I_original = MASKS(:,:,i);
     I = I_original;
-    [x,y] = find(I == 3);
+    [x,y] = find(I == 3); % THIS DOESN'T WORK LIKE THAT!!!
     I(I==1) = 0;
     I(I==2) = 0;
     I = im2double(I);

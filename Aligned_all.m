@@ -69,47 +69,54 @@ for k = 1:length(Files_GT)
     disp(['Loading now: ', Filename_GT, '  and  ', Filename_MRI]);
     
     %% Shift images
-
+    % Load original image
     I = imread(Filename_GT);
     [row, col] = size(I);
-    figure;
-    subplot(2,2,1)
-    imshow(I)
-    xlabel('Original ground truth image');
-
-    % plot the thresholded image
-    subplot(2,2,2)
-    I(I < 255) = 0; 
+    
+    % generate thresholded image
     img = I;
+    img(img < 255) = 0; 
     img = bwareaopen(img,2000);
-    imshow(img);
-    xlabel('Thresholded Image');
-
 
     % find the centroid of the objects (use regionprops() ) & plot the original image with the centroid
     stat=regionprops(img,'Centroid');
     centroid=cat(2, stat.Centroid);
-
-    subplot(2,2,3)
-    imshow(I)
-    hold on
-    plot(centroid(:,1),centroid(:,2),'kX','linewidth', 3, 'MarkerSize', 30)
-    xlabel('Centroid in thresholded image');
-    hold off
-
-    % Print coordinates of centroid:
-    fprintf('Centroid of myocardium:\n')
-    disp(stat.Centroid)
     
     % Calculate shift of images:
     x_mid = int16(row/2);
     y_mid = int16(col/2);
     
-    % Plot shifted image
-    subplot(2,2,4)
-    img = imtranslate(img, [x_mid-stat.Centroid(1), y_mid-stat.Centroid(2)]);
-    imshow(img);
-    xlabel('Shifted image')
+    % Shift images and surface points
+    I_GT = imtranslate(I, [x_mid-stat.Centroid(1), y_mid-stat.Centroid(2)]);
+    load(Filename_MRI);
+    I_MRI = imtranslate(image_data, [x_mid-stat.Centroid(1), y_mid-stat.Centroid(2)]);
+
+    % Store shifted images and surface points
+    imwrite(I_GT, fullfile(StorePath_GT,['image' num2str(k) '_GT.png']));
+    save(fullfile(StorePath_MRI,['image' num2str(k) '_MRIMAT.mat']),'I_MRI')
+        
+    %% Plot shifted image
+    if k == 1
+        figure;
+        subplot(2,2,1)
+        imshow(I)
+        xlabel('Original ground truth image');
+
+        subplot(2,2,2)
+        imshow(img);
+        xlabel('Thresholded Image');
+
+        subplot(2,2,3)
+        imshow(img)
+        hold on
+        plot(centroid(:,1),centroid(:,2),'rX','linewidth', 3, 'MarkerSize', 15)
+        xlabel('Centroid in thresholded image');
+        hold off
+
+        subplot(2,2,4)
+        imshow(I_GT);
+        xlabel('Shifted image')
+    end    
 end
 
 

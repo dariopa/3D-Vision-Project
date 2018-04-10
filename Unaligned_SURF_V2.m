@@ -9,7 +9,6 @@ imtool close all;	% Close all figure windows created by imtool.
 addpath(genpath('snakes'));
 
 %% Options for snakes
-
 Options=struct;
 Options.Verbose=true;
 Options.Iterations=600;
@@ -58,9 +57,6 @@ for k = 1:length(Files_GT)
     I(I<255) = 0;
     I = im2double(I);
     
-%     figure, imshow(I); [x,y] = getpts;
-%     imshow(I);
-    
     % run snakes
     [O,J] = Snake2D(I, P, Options);
     
@@ -71,8 +67,8 @@ for k = 1:length(Files_GT)
     %% Store coordinates
     coordname = fullfile(StorePath,['image' num2str(k),'_surf.asc']);
     fileID = fopen(coordname,'w');
-    fprintf(fileID,'%d %d\n',50,50);
-    for j=1:50
+    fprintf(fileID,'%d %d\n',Options.nPoints,Options.nPoints);
+    for j=1:Options.nPoints
         fprintf(fileID,'%f %f\n',O(j,1),O(j,2));
     end
     fclose(fileID);

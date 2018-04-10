@@ -10,7 +10,7 @@ addpath(genpath('snakes'));
 
 %% Options for snakes
 Options=struct;
-Options.Verbose=true;
+Options.Verbose=false;
 Options.Iterations=600;
 Options.nPoints=50;
 Options.Wedge=2;
@@ -50,6 +50,7 @@ for k = 1:length(Files_GT)
     Filename_GT = fullfile(LoadPath_GT, ['image' num2str(k) '_GT.png']);
     disp(['Loading now: ', Filename_GT]);
     I = imread(Filename_GT);
+    landmark = findlandmark(I); % find landmark
     [row, col] = size(I);
     y=[0 0 row col];
     x=[0 col row 0];
@@ -62,7 +63,21 @@ for k = 1:length(Files_GT)
     
     imshow(I); 
     hold on;
-    img = plot([O(:,2);O(1,2)],[O(:,1);O(1,1)]);
+    % visualize snakes
+    plot([O(:,2);O(1,2)],[O(:,1);O(1,1)]);
+    % visualize landmark
+    img = plot(landmark(2), landmark(1), '-o', 'MarkerEdge','black', 'MarkerFaceColor','red');
+    
+    %% Sort coordinates 
+    % with the help of the landmark
+    
+    % find index of O with shortest distance to the landmark
+    distvec = O-landmark;
+    [min_dist, index] = min(sqrt(distvec(:,1).^2 + distvec(:,2).^2));
+    
+    % re-order O
+    % the new order starts from index and goes clock-wise
+    O = [O(index:end,:); O(1:index-1,:)];
     
     %% Store coordinates
     coordname = fullfile(StorePath,['image' num2str(k),'_surf.asc']);

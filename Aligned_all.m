@@ -102,7 +102,7 @@ for k = 1:length(Files_GT)
     % generate thresholded image
     img = I;
     img(img < 255) = 0; 
-    img = bwareaopen(img,500);
+    img = imbinarize(img);
 
     % find the centroid of the objects (use regionprops() ) & plot the original image with the centroid
     stat=regionprops(img,'Centroid');

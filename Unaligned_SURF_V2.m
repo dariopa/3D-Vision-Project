@@ -9,20 +9,20 @@ imtool close all;	% Close all figure windows created by imtool.
 addpath(genpath('snakes'));
 
 %% Distance threshold
-thresh = 40;
+thresh = 30;
 %% Options for snakes
 Options=struct;
 Options.Verbose=true;
-Options.Iterations=200;
+Options.Iterations=130;
 Options.nPoints=50;
 Options.Wedge=2;
 Options.Wline=0;
 Options.Wterm=0;
 Options.Kappa=4;
 Options.Sigma1=1;
-Options.Sigma2=4.1;
+Options.Sigma2=3;
 Options.Alpha=0.1;
-Options.Beta=1;
+Options.Beta=0.1;
 Options.Mu=0.2;
 Options.Delta=-0.2;
 
@@ -98,4 +98,8 @@ for k = 1:length(Files_GT)
     
     % save png file
     saveas(img, fullfile(StorePath,['image' num2str(k) '_GT.png']));
+    
+    if Options.Verbose==true
+        close all;
+    end
 end

@@ -34,7 +34,7 @@ do_fliplr = False
 
 # Rarely changed settings
 use_data_fraction = False  # Should normally be False
-max_epochs = 7000
+max_epochs = 10
 schedule_gradient_threshold = 0.00001  # When the gradient of the learning curve is smaller than this value the LR will
                                        # be reduced
 

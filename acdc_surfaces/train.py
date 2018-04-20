@@ -351,12 +351,6 @@ def run_training(continue_run):
                                                        eval_loss,
                                                        images_pl,
                                                        labels_pl,
-                                                       PCA_U_pl,
-                                                       PCA_mean_pl,
-                                                       PCA_U,
-                                                       PCA_mean,
-                                                       PCA_sqrtsigma_pl,
-                                                       PCA_sqrtsigma,
                                                        training_pl,
                                                        keep_prob_pl,
                                                        images_train,
@@ -404,12 +398,6 @@ def run_training(continue_run):
                                                            eval_loss,
                                                            images_pl,
                                                            labels_pl,
-                                                           PCA_U_pl,
-                                                           PCA_mean_pl,
-                                                           PCA_U,
-                                                           PCA_mean,
-                                                           PCA_sqrtsigma_pl,
-                                                           PCA_sqrtsigma,
                                                            training_pl,
                                                            keep_prob_pl,
                                                            images_val,
@@ -427,7 +415,7 @@ def run_training(continue_run):
 
                         one_image = images_test[0:exp_config.batch_size, :, :]
                         one_image = np.expand_dims(one_image, axis = 3)
-                        one_prediction = sess.run(logits, feed_dict={images_pl: one_image, training_pl: False, keep_prob_pl: 1, PCA_mean_pl: PCA_mean, PCA_U_pl: PCA_U, PCA_sqrtsigma_pl: PCA_sqrtsigma})
+                        one_prediction = sess.run(logits, feed_dict={images_pl: one_image, training_pl: False, keep_prob_pl: 1})
                         axis_limits = [0, exp_config.image_size[0], 0, exp_config.image_size[1]]
 
 
@@ -670,12 +658,6 @@ def do_eval(sess,
             eval_loss,
             images_placeholder,
             labels_placeholder,
-            PCA_U_pl,
-            PCA_mean_pl,
-            PCA_U,
-            PCA_mean,
-            PCA_sqrtsigma_pl,
-            PCA_sqrtsigma,
             training_time_placeholder,
             keep_probability_placeholder,
             images,
@@ -709,9 +691,6 @@ def do_eval(sess,
 
         feed_dict = { images_placeholder: x,
                       labels_placeholder: y,
-                      PCA_U_pl: PCA_U,
-                      PCA_mean_pl: PCA_mean,
-                      PCA_sqrtsigma_pl: PCA_sqrtsigma,
                       training_time_placeholder: False,
                       keep_probability_placeholder: 1}
 

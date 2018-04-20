@@ -549,7 +549,7 @@ def run_training(continue_run):
 
 def run_inference():
     # Load data
-    data_file = '/home/tothovak/work/CSR/Data/data_2D_size_212_212_res_1.36719_1.36719_sl_2_5/data_2D_size_212_212_res_1.36719_1.36719_sl_2_5.hdf5'
+    data_file = '../preproc_data_augmented/Unaligned_Data.hdf5'
     data = h5py.File(data_file, 'r')
     # the following are HDF5 datasets, not numpy arrays
     images_val = data['images_val']

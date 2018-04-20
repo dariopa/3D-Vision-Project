@@ -36,7 +36,11 @@ import h5py
 from experiments import CL9_DL1_nobias as exp_config
 #from experiments import CL5_DL3 as exp_config
 #from experiments import bounding_box as exp_config
+<<<<<<< HEAD
 #from experiments import PCA as exp_config
+=======
+# from experiments import PCA as exp_config
+>>>>>>> b12f9eb88fa6837b4267d77c98fa865ccd79f743
 ########################################################################################
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
@@ -62,6 +66,7 @@ else:
                str(exp_config.batch_size) + 'Batch' + str(exp_config.keep_probability) + 'keep' + str(exp_config.weight_decay) + 'WD'
 
 log_dir = os.path.join(sys_config.log_root, log_dir_name)
+print(log_dir)
 
 # Set SGE_GPU environment variable if we are not on the local host
 sys_config.setup_GPU_environment()
@@ -589,7 +594,9 @@ def run_inference():
         # Run the Op to initialize the variables.
         sess.run(init)
 
-        saver.restore(sess, tf.train.latest_checkpoint('/home/tothovak/work/CSR/Code/acdc_segmenter/acdc_logdir/shallow2D_ssd1500Epoch_0.0001LR5Batch/'))
+        if not os.path.isdir('acdc_logdir/'):
+            os.makedirs('acdc_logdir/')
+        saver.restore(sess, tf.train.latest_checkpoint('acdc_logdir/shallow2D_ssd1500Epoch_0.0001LR5Batch/'))
 
         images_test = np.expand_dims(images_test, axis=3)
         print(images_test.shape)

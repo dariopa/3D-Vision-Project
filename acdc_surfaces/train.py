@@ -33,10 +33,10 @@ import h5py
 #from experiments import CL9_DL1_UKBB as exp_config
 #from experiments import shallow_CNN_UKBB as exp_config
 #from experiments import shallow_FCN_UKBB as exp_config
-#from experiments import CL9_DL1_nobias as exp_config
+from experiments import CL9_DL1_nobias as exp_config
 #from experiments import CL5_DL3 as exp_config
 #from experiments import bounding_box as exp_config
-from experiments import PCA as exp_config
+#from experiments import PCA as exp_config
 ########################################################################################
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
@@ -101,7 +101,9 @@ def run_training(continue_run):
 
 
     # Load data
-    data = acdc_data.load_and_maybe_process_data(
+    data = h5py.File(os.path.join(sys_config.preproc_folder,'Unaligned_Data.hdf5'), 'r')
+    '''
+    acdc_data.load_and_maybe_process_data(
         input_folder=sys_config.data_root,
         preprocessing_folder=sys_config.preproc_folder,
         mode=exp_config.data_mode,
@@ -112,7 +114,8 @@ def run_training(continue_run):
         force_overwrite=False,
         split_test_train=(not train_on_all_data)
     )
-
+    '''
+    
     # the following are HDF5 datasets, not numpy arrays
     images_train = data['images_train']
     labels_train = data['labels_train']

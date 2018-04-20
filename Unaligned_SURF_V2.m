@@ -12,7 +12,7 @@ addpath(genpath('snakes'));
 thresh = 2;
 %% Options for snakes
 Options=struct;
-Options.Verbose=true;
+Options.Verbose=false;
 Options.Iterations=200;
 Options.nPoints=50;
 Options.Wedge=2;

@@ -16,7 +16,7 @@ start_slice = 2
 end_slice = 5
 
 # Training settings
-batch_size = 1
+batch_size = 16
 learning_rate = 0.0001
 optimizer_handle = tf.train.AdamOptimizer
 schedule_lr = False
@@ -38,5 +38,5 @@ max_epochs = 10
 schedule_gradient_threshold = 0.00001  # When the gradient of the learning curve is smaller than this value the LR will
                                        # be reduced
 
-train_eval_frequency = 200
-val_eval_frequency = 100
+train_eval_frequency = 100
+val_eval_frequency = 50

@@ -52,9 +52,9 @@ for k = 1:length(Files_GT)
     Filename_GT = fullfile(LoadPath_GT, ['image' num2str(k) '_GT.png']);
     disp(['Loading now: ', Filename_GT]);
     I = imread(Filename_GT);
+    landmark = findlandmark(I); % find landmark
     I(I<255) = 0;
     I = im2double(I);
-    landmark = findlandmark(I); % find landmark
     
     I_binarized = imbinarize(I);
     stat=regionprops(I_binarized,'Centroid');

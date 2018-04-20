@@ -55,7 +55,11 @@ end
 
 for k=1:export_size
 FileName = strcat(StorePath,'image', num2str(k), '_MRIMAT.mat');
+FileName_png = strcat(StorePath,'image', num2str(k), '_MRIMAT.png');
 image_data = M(:,:,k);
+MRI_png = uint8(image_data*255);
+imwrite(MRI_png,FileName_png);
+
 save(FileName,'image_data');
 end
 

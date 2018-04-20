@@ -9,11 +9,11 @@ imtool close all;	% Close all figure windows created by imtool.
 addpath(genpath('snakes'));
 
 %% Distance threshold
-thresh = 30;
+thresh = 2;
 %% Options for snakes
 Options=struct;
 Options.Verbose=true;
-Options.Iterations=230;
+Options.Iterations=200;
 Options.nPoints=50;
 Options.Wedge=2;
 Options.Wline=0;
@@ -24,7 +24,7 @@ Options.Sigma2=0.5;
 Options.Alpha=0.1;
 Options.Beta=0.1;
 Options.Mu=0.2;
-Options.Delta=-0.2;
+Options.Delta=0.2;
 
 %% Define pathes
 LoadPath_GT = 'GT_Unaligned\'; 
@@ -52,6 +52,8 @@ for k = 1:length(Files_GT)
     Filename_GT = fullfile(LoadPath_GT, ['image' num2str(k) '_GT.png']);
     disp(['Loading now: ', Filename_GT]);
     I = imread(Filename_GT);
+    I(I<255) = 0;
+    I = im2double(I);
     landmark = findlandmark(I); % find landmark
     
     I_binarized = imbinarize(I);
@@ -63,9 +65,7 @@ for k = 1:length(Files_GT)
     y=[y_center-thresh y_center+thresh y_center+thresh y_center-thresh];
     x=[x_center-thresh x_center-thresh x_center+thresh x_center+thresh];
     P=[x(:) y(:)];
-    I(I<255) = 0;
-    I = im2double(I);
-    
+
     % run snakes
     [O,J] = Snake2D(I, P, Options);
     hold off;

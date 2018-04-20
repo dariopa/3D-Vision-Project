@@ -36,7 +36,11 @@ import h5py
 from experiments import CL9_DL1_nobias as exp_config
 #from experiments import CL5_DL3 as exp_config
 #from experiments import bounding_box as exp_config
+<<<<<<< HEAD
 # from experiments import PCA as exp_config
+=======
+#from experiments import PCA as exp_config
+>>>>>>> 704c46078994843d426b2d24cf16bc7803125336
 ########################################################################################
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')

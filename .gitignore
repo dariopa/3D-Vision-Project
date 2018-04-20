@@ -8,3 +8,7 @@
 /preproc*
 /acdc_surfaces/src/
 /acdc_surfaces/__pycache__/
+/acdc_surfaces/config/__pycache__/
+/acdc_logdir/
+/acdc_surfaces/experiments/__pycache__/
+/acdc_surfaces/tfwrapper/__pycache__/

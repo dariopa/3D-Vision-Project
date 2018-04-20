@@ -33,10 +33,10 @@ import h5py
 #from experiments import CL9_DL1_UKBB as exp_config
 #from experiments import shallow_CNN_UKBB as exp_config
 #from experiments import shallow_FCN_UKBB as exp_config
-#from experiments import CL9_DL1_nobias as exp_config
+from experiments import CL9_DL1_nobias as exp_config
 #from experiments import CL5_DL3 as exp_config
 #from experiments import bounding_box as exp_config
-from experiments import PCA as exp_config
+#from experiments import PCA as exp_config
 ########################################################################################
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
@@ -62,6 +62,7 @@ else:
                str(exp_config.batch_size) + 'Batch' + str(exp_config.keep_probability) + 'keep' + str(exp_config.weight_decay) + 'WD'
 
 log_dir = os.path.join(sys_config.log_root, log_dir_name)
+print(log_dir)
 
 # Set SGE_GPU environment variable if we are not on the local host
 sys_config.setup_GPU_environment()
@@ -101,7 +102,9 @@ def run_training(continue_run):
 
 
     # Load data
-    data = acdc_data.load_and_maybe_process_data(
+    data = h5py.File(os.path.join(sys_config.preproc_folder,'Unaligned_Data.hdf5'), 'r')
+    '''
+    acdc_data.load_and_maybe_process_data(
         input_folder=sys_config.data_root,
         preprocessing_folder=sys_config.preproc_folder,
         mode=exp_config.data_mode,
@@ -112,7 +115,8 @@ def run_training(continue_run):
         force_overwrite=False,
         split_test_train=(not train_on_all_data)
     )
-
+    '''
+    
     # the following are HDF5 datasets, not numpy arrays
     images_train = data['images_train']
     labels_train = data['labels_train']
@@ -347,12 +351,6 @@ def run_training(continue_run):
                                                        eval_loss,
                                                        images_pl,
                                                        labels_pl,
-                                                       PCA_U_pl,
-                                                       PCA_mean_pl,
-                                                       PCA_U,
-                                                       PCA_mean,
-                                                       PCA_sqrtsigma_pl,
-                                                       PCA_sqrtsigma,
                                                        training_pl,
                                                        keep_prob_pl,
                                                        images_train,
@@ -400,12 +398,6 @@ def run_training(continue_run):
                                                            eval_loss,
                                                            images_pl,
                                                            labels_pl,
-                                                           PCA_U_pl,
-                                                           PCA_mean_pl,
-                                                           PCA_U,
-                                                           PCA_mean,
-                                                           PCA_sqrtsigma_pl,
-                                                           PCA_sqrtsigma,
                                                            training_pl,
                                                            keep_prob_pl,
                                                            images_val,
@@ -423,7 +415,7 @@ def run_training(continue_run):
 
                         one_image = images_test[0:exp_config.batch_size, :, :]
                         one_image = np.expand_dims(one_image, axis = 3)
-                        one_prediction = sess.run(logits, feed_dict={images_pl: one_image, training_pl: False, keep_prob_pl: 1, PCA_mean_pl: PCA_mean, PCA_U_pl: PCA_U, PCA_sqrtsigma_pl: PCA_sqrtsigma})
+                        one_prediction = sess.run(logits, feed_dict={images_pl: one_image, training_pl: False, keep_prob_pl: 1})
                         axis_limits = [0, exp_config.image_size[0], 0, exp_config.image_size[1]]
 
 
@@ -469,84 +461,13 @@ def run_training(continue_run):
 
                 step += 1
 
-
-        # #################### PREDICT #######################
-        #
-        # print(images_test.shape)
-        #
-        # #logits = exp_config.model_handle(images_test, training=tf.constant(False, dtype=tf.bool), nlabels=exp_config.nlabels)
-        # images_test = np.expand_dims(images_test,axis=3)
-        # print(images_test.shape)
-        # pred = sess.run(logits, feed_dict={images_pl: images_test})
-        # print(pred.shape)
-        # pred = np.squeeze(pred, axis=(1,))
-        # print(pred.shape)
-        #
-        # DICEall = np.zeros((images_test.shape[0], 1))
-        #
-        # # save predictions
-        # res_path = os.path.join(sys_config.out_data_root, log_dir_name)
-        # if not tf.gfile.Exists(res_path):
-        #     tf.gfile.MakeDirs(res_path)
-        # for i in range(pred.shape[0]):
-        #     res = np.asarray(pred[i, :, :])
-        #     # print(res)
-        #
-        #
-        #
-        #     # save result
-        #     outFile = os.path.join(res_path, "pred" + str(i) + ".csv")
-        #     np.savetxt(outFile, res, delimiter=" ")
-        #
-        #     # saveplot
-        #     outFilePng = os.path.join(res_path, "pred" + str(i) + ".png")
-        #     # utils.view_plot(res)
-        #     axis_limits = [0, exp_config.image_size[0], 0, exp_config.image_size[1]]
-        #     utils.save_plot(res, outFilePng, axis_limits)
-        #
-        #     # save intensity image
-        #     outFileBW = os.path.join(res_path, "pred" + str(i) + "BW.png")
-        #     outImageBW = images_test[i, :, :, :]
-        #     print(outImageBW.shape)
-        #     outImageBW = np.squeeze(outImageBW, axis=(2,))
-        #     misc.imsave(outFileBW, outImageBW)
-        #
-        #     # save true label
-        #     outFileGT = os.path.join(res_path, "pred" + str(i) + "GT.png")
-        #     print(labels_test.shape)
-        #     outGT = labels_test[i, :, :]
-        #
-        #     utils.save_plot(outGT, outFileGT, axis_limits)
-        #     utils.save_plot
-        #
-        #     # save GT and pred in one plot
-        #     outFileGTpred = os.path.join(res_path, "pred" + str(i) + "predGT.png")
-        #     outGT = labels_test[i, :, :]
-        #
-        #     utils.save_plot(outGT, outFileGT, axis_limits)
-        #     # utils.save_plot
-        #     utils.save_two_plots(outGT, res, outFileGTpred, axis_limits)
-        #
-        #     segmentation = utils.create_segmentation(res, exp_config.image_size)
-        #     # save intensity image
-        #     outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
-        #     # print(segmentation)
-        #     misc.imsave(outFileSegm, segmentation)
-        #
-        #     # compute DICE coefficient
-        #     DICEall[i], _, _, _, _ = utils.computeDICE(segmentation.astype(int), GT_test[i, :, :] / 255)
-        #     print(i, ": ", DICEall[i])
-        #
-        # print("**Global stats**")
-        # print("Avg Dice: ", DICEall.mean())
-        # print("Std Dice: ", DICEall.std())
         sess.close()
     data.close()
 
 
 def run_inference():
     # Load data
-    data_file = '/home/tothovak/work/CSR/Data/data_2D_size_212_212_res_1.36719_1.36719_sl_2_5/data_2D_size_212_212_res_1.36719_1.36719_sl_2_5.hdf5'
+    data_file = '../preproc_data_augmented/Unaligned_Data.hdf5'
     data = h5py.File(data_file, 'r')
     # the following are HDF5 datasets, not numpy arrays
     images_val = data['images_val']
@@ -586,7 +507,9 @@ def run_inference():
         # Run the Op to initialize the variables.
         sess.run(init)
 
-        saver.restore(sess, tf.train.latest_checkpoint('/home/tothovak/work/CSR/Code/acdc_segmenter/acdc_logdir/shallow2D_ssd1500Epoch_0.0001LR5Batch/'))
+        if not os.path.isdir('acdc_logdir/'):
+            os.makedirs('acdc_logdir/')
+        saver.restore(sess, tf.train.latest_checkpoint('acdc_logdir/shallow2D_ssd1500Epoch_0.0001LR5Batch/'))
 
         images_test = np.expand_dims(images_test, axis=3)
         print(images_test.shape)
@@ -664,12 +587,6 @@ def do_eval(sess,
             eval_loss,
             images_placeholder,
             labels_placeholder,
-            PCA_U_pl,
-            PCA_mean_pl,
-            PCA_U,
-            PCA_mean,
-            PCA_sqrtsigma_pl,
-            PCA_sqrtsigma,
             training_time_placeholder,
             keep_probability_placeholder,
             images,
@@ -703,9 +620,6 @@ def do_eval(sess,
 
         feed_dict = { images_placeholder: x,
                       labels_placeholder: y,
-                      PCA_U_pl: PCA_U,
-                      PCA_mean_pl: PCA_mean,
-                      PCA_sqrtsigma_pl: PCA_sqrtsigma,
                       training_time_placeholder: False,
                       keep_probability_placeholder: 1}
 

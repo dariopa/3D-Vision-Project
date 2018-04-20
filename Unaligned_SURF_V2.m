@@ -13,14 +13,14 @@ thresh = 30;
 %% Options for snakes
 Options=struct;
 Options.Verbose=true;
-Options.Iterations=130;
+Options.Iterations=230;
 Options.nPoints=50;
 Options.Wedge=2;
 Options.Wline=0;
 Options.Wterm=0;
 Options.Kappa=4;
 Options.Sigma1=1;
-Options.Sigma2=3;
+Options.Sigma2=0.5;
 Options.Alpha=0.1;
 Options.Beta=0.1;
 Options.Mu=0.2;

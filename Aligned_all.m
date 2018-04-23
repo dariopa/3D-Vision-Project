@@ -117,7 +117,7 @@ for k = 1:length(Files_GT)
     I_GT = imtranslate(I, [x_mid-stat.Centroid(1), y_mid-stat.Centroid(2)]);
     % MRI Image
     load(Filename_MRI);
-    I_MRI = imtranslate(image_data, [x_mid-stat.Centroid(1), y_mid-stat.Centroid(2)]);
+    image_data = imtranslate(image_data, [x_mid-stat.Centroid(1), y_mid-stat.Centroid(2)]);
     % Surface Points
     surf = load(Filename_SURF);
     surf = surf(2:end,:);
@@ -130,7 +130,7 @@ for k = 1:length(Files_GT)
     % Ground Truth Image
     imwrite(I_GT, fullfile(StorePath_GT,['image' num2str(k) '_GT.png']));
     % MRI Image
-    save(fullfile(StorePath_MRI,['image' num2str(k) '_MRIMAT.mat']),'I_MRI');
+    save(fullfile(StorePath_MRI,['image' num2str(k) '_MRIMAT.mat']),'image_data');
     % Surface Points
     coordname = fullfile(StorePath_SURF,['image' num2str(k),'_surf.asc']);
     fileID = fopen(coordname,'w');

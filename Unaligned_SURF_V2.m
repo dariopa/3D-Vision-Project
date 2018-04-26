@@ -27,8 +27,8 @@ Options.Mu=0.2;
 Options.Delta=0.2;
 
 %% Define pathes
-LoadPath_GT = 'GT_Unaligned\'; 
-StorePath = 'SURF_Unaligned\';
+LoadPath_GT = 'GT_Unaligned/'; 
+StorePath = 'SURF_Unaligned/';
 
 % Create Store Folder if not already existing
 if ~isdir(StorePath)

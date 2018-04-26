@@ -7,12 +7,12 @@ imtool close all;	% Close all figure windows created by imtool.
 
 
 %% HARDCODED INPUTS
-LoadPath_GT = 'GT_Unaligned\';
-LoadPath_MRI = 'MRI_Unaligned\';
-LoadPath_SURF = 'SURF_Unaligned\';
-StorePath_GT = 'GT_Aligned\';
-StorePath_MRI = 'MRI_Aligned\';
-StorePath_SURF = 'SURF_Aligned\';
+LoadPath_GT = 'GT_Unaligned/';
+LoadPath_MRI = 'MRI_Unaligned/';
+LoadPath_SURF = 'SURF_Unaligned/';
+StorePath_GT = 'GT_Aligned/';
+StorePath_MRI = 'MRI_Aligned/';
+StorePath_SURF = 'SURF_Aligned/';
 filePattern_GT = fullfile(LoadPath_GT, '*.png');
 filePattern_MRI = fullfile(LoadPath_MRI, '*.mat');
 filePattern_SURF = fullfile(LoadPath_SURF, '*.asc');

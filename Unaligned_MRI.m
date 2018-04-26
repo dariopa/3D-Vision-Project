@@ -10,7 +10,7 @@ export_all = 1;     % 1 - Export All
 
 
 %%%% Trainingsset einlesen
-filename = 'Data/column_full_UKBB_data_2D_size_212_212_res_1.36719_1.36719_sl_2_5_onlytrain.hdf5';
+filename = 'preproc_data_augmented/column_full_UKBB_data_2D_size_212_212_res_1.36719_1.36719_sl_2_5_onlytrain.hdf5';
 
 %h5disp(filename);      % Function to inspect the hdf5 file
 info = h5info(filename);
@@ -34,7 +34,7 @@ imshow(FirstMask,[]);
 %%From data.py
 %img_file = file_name[idx] + "_MRIMAT.mat"
 
-StorePath = 'MRI_Unaligned\';
+StorePath = 'MRI_Unaligned/';
 if ~isdir(StorePath)
     mkdir(StorePath);
 end
@@ -67,7 +67,7 @@ end
 %%% EXPORT GROUND TRUTH IMAGES MIT NUMMERIERUNG %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-pngPath = 'GT_Unaligned\';
+pngPath = 'GT_Unaligned/';
 if ~isdir(pngPath)
     mkdir(pngPath);
 end

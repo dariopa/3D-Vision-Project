@@ -2,6 +2,8 @@
 # Christian F. Baumgartner (c.f.baumgartner@gmail.com)
 # Lisa M. Koch (lisa.margret.koch@gmail.com)
 
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 from tfwrapper import layers
 

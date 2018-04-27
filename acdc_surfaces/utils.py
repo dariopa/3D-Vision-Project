@@ -5,9 +5,10 @@
 import nibabel as nib
 import numpy as np
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import glob
 import scipy.misc as misc
+import matplotlib
+matplotlib.use('PS')   # generate postscript output by default
 import matplotlib.pyplot as plt
 import cv2
 import matplotlib.path as pth

@@ -1,4 +1,6 @@
 import model_zoo
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 
 experiment_name = 'CL9_DL1_nobias'

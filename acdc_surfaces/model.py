@@ -5,6 +5,8 @@
 import tensorflow as tf
 from tfwrapper import losses
 import numpy as np
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 
 import tensorflow.examples.tutorials.mnist
 

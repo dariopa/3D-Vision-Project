@@ -5,6 +5,7 @@
 import nibabel as nib
 import numpy as np
 import os
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import glob
 import scipy.misc as misc
 import matplotlib.pyplot as plt

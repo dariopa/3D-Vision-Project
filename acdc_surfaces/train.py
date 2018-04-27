@@ -10,6 +10,8 @@ import tensorflow as tf
 import numpy as np
 import scipy.misc as misc
 from scipy.io import loadmat
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 
 import utils
 import image_utils

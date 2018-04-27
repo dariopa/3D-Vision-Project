@@ -1,4 +1,6 @@
 import h5py
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 import config.system as sys_config
 import numpy as np
@@ -24,12 +26,8 @@ from experiments import PCA as exp_config
 #from experiments import CL9_DL1_UKBB as exp_config
 #from experiments import shallow_CNN_UKBB as exp_config
 ########################################################################################
-DATAFILE = '/home/tothovak/work/CSR/Code/acdc_segmenter/preproc_data/data_2D_size_212_212_res_1.36719_1.36719_sl_2_5.hdf5'
-#SESSION = '/home/tothovak/work/CSR/Code/acdc_segmenter/acdc_logdir/unet2D_bn_ssd2500Epoch_0.001LR5Batch/'
-#SESSION = '/home/tothovak/work/CSR/Code/acdc_segmenter/acdc_logdir/shallow2D_ssd200Epoch_0.0001LR5Batch/'
-#SESSION = '/home/tothovak/work/CSR/Code/acdc_segmenter/acdc_logdir/FCN8_bn_ssd2000Epoch_0.001LR5Batch/'
-#SESSION = '/home/tothovak/work/CSR/Code/acdc_segmenter/acdc_logdir/PCA_main2500Epoch_0.0001LR5Batch/'
-SESSION = '/home/tothovak/work/CSR/Code/acdc_segmenter/acdc_logdir/PCA5499Epoch_0.0001LR5Batch1keep0.0WD100PCA/'
+DATAFILE = '../preproc_data/data_2D_size_212_212_res_1.36719_1.36719_sl_2_5.hdf5'
+SESSION = '../acdc_logdir/CL9_DL1_nobias10Epoch_0.0001LR16Batch1keep0WD/'
 #log_dir_name = exp_config.experiment_name + str(exp_config.max_epochs) +'Epoch_' + str(exp_config.learning_rate) + 'LR' + str(exp_config.batch_size) + 'Batch'
 
 log_dir_name = SESSION.split("/")[-2]

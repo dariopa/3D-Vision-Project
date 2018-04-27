@@ -15,7 +15,7 @@ from scipy.io import loadmat
 # Set the config file of the experiment you want to run here:
 from experiments import CL9_DL1_nobias as exp_config
 ########################################################################################
-DATAFILE = '../preproc_data/data_2D_size_212_212_res_1.36719_1.36719_sl_2_5.hdf5'
+DATAFILE = '../preproc_data/Unaligned_Data.hdf5'
 SESSION = '../acdc_logdir/CL9_DL1_nobias10Epoch_0.0001LR16Batch1keep0WD/'
 #log_dir_name = exp_config.experiment_name + str(exp_config.max_epochs) +'Epoch_' + str(exp_config.learning_rate) + 'LR' + str(exp_config.batch_size) + 'Batch'
 

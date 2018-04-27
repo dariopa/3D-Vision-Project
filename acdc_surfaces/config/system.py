@@ -19,7 +19,13 @@ local_hostnames = ['bmicdl03']  # used to check if on cluster or not
 
 ##################################################################################
 
-log_root = os.path.join(project_root, 'acdc_logdir')
+log_root = os.path.join(project_root, 'acdc_logdir/')
+if not os.path.isdir(log_root):
+    os.makedirs(log_root)
+out_data_root = os.path.join(project_root, 'Prediciton_unaligned_data/')
+if not os.path.isdir(out_data_root):
+    os.makedirs(out_data_root)
+    
 preproc_folder = os.path.join(project_root,'preproc_data_augmented')
 
 def setup_GPU_environment():

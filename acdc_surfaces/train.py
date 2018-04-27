@@ -76,7 +76,7 @@ except:
                     'function you need to setup OpenCV.')
 
 
-def run_training(continue_run):
+def run_training(continue_run, DataPath):
 
     logging.info('EXPERIMENT NAME: %s' % exp_config.experiment_name)
 
@@ -104,7 +104,7 @@ def run_training(continue_run):
 
 
     # Load data
-    data = h5py.File(os.path.join(sys_config.preproc_folder,'Unaligned_Data.hdf5'), 'r')
+    data = h5py.File(DataPath, 'r')
     '''
     acdc_data.load_and_maybe_process_data(
         input_folder=sys_config.data_root,
@@ -467,9 +467,9 @@ def run_training(continue_run):
     data.close()
 
 
-def run_inference():
+def run_inference(DataPath):
     # Load data
-    data_file = '../preproc_data_augmented/Unaligned_Data.hdf5'
+    data_file = DataPath
     data = h5py.File(data_file, 'r')
     # the following are HDF5 datasets, not numpy arrays
     images_val = data['images_val']
@@ -509,8 +509,6 @@ def run_inference():
         # Run the Op to initialize the variables.
         sess.run(init)
 
-        if not os.path.isdir('acdc_logdir/'):
-            os.makedirs('acdc_logdir/')
         saver.restore(sess, tf.train.latest_checkpoint('acdc_logdir/shallow2D_ssd1500Epoch_0.0001LR5Batch/'))
 
         images_test = np.expand_dims(images_test, axis=3)
@@ -747,7 +745,7 @@ def iterate_minibatches(images, labels, batch_size, augment_batch=False):
 
 
 def main():
-
+    DataPath = '../preproc_data_augmented/Unaligned_Data.hdf5'
     continue_run = True
     if not tf.gfile.Exists(log_dir):
         tf.gfile.MakeDirs(log_dir)
@@ -756,14 +754,8 @@ def main():
     # Copy experiment config file
     shutil.copy(exp_config.__file__, log_dir)
 
-    run_training(continue_run)
-   #run_inference()
+    # run_training(continue_run, DataPath)
+    run_inference(DataPath)
 
 if __name__ == '__main__':
-
-    # parser = argparse.ArgumentParser(
-    #     description="Train a neural network.")
-    # parser.add_argument("CONFIG_PATH", type=str, help="Path to config file (assuming you are in the working directory)")
-    # args = parser.parse_args()
-
     main()

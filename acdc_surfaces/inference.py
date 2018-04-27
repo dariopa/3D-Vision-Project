@@ -107,7 +107,7 @@ def run_inference():
         DICEall = np.zeros((images_test.shape[0], 1))
 
         # save predictions
-        res_path = os.path.join(sys_config.log_root, log_dir_name)
+        res_path = os.path.join(sys_config.out_data_root, log_dir_name)
         if not tf.gfile.Exists(res_path):
             tf.gfile.MakeDirs(res_path)
         for i in range(images_test.shape[0]):

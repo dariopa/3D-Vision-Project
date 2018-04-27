@@ -76,7 +76,7 @@ def run_inference():
         if do_pca:
             PCA_U_pl = tf.placeholder(tf.float32, shape=PCA_U.shape, name='PCA_U')
             PCA_mean_pl = tf.placeholder(tf.float32, shape=PCA_mean.shape, name='PCA_mean')
-        PCA_sqrtsigma_pl = tf.placeholder(tf.float32, shape=PCA_sqrtsigma.shape, name='PCA_sqrtsigma')
+            PCA_sqrtsigma_pl = tf.placeholder(tf.float32, shape=PCA_sqrtsigma.shape, name='PCA_sqrtsigma')
 
         #training_pl = tf.placeholder(tf.bool, shape=[])
         #training = tf.constant(False, dtype=tf.bool)

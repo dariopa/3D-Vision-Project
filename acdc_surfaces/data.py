@@ -70,16 +70,16 @@ class DataMakerSynth:
 if __name__ == '__main__':
 
 # Unaligned data
-    # base_path_MRI = '../MRI_Unaligned/'
-    # base_path_GT = '../GT_Unaligned/'
-    # base_path_SURF = '../SURF_Unaligned/'
-    # out_file_name = '../preproc_data_augmented/Unaligned_Data.hdf5'
+    base_path_MRI = '../MRI_Unaligned/'
+    base_path_GT = '../GT_Unaligned/'
+    base_path_SURF = '../SURF_Unaligned/'
+    out_file_name = '../preproc_data_augmented/Unaligned_Data.hdf5'
 
 # Aligned data
-    base_path_MRI = '../MRI_Aligned/'
-    base_path_GT = '../GT_Aligned/'
-    base_path_SURF = '../SURF_Aligned/'
-    out_file_name = '../preproc_data_augmented/Aligned_Data.hdf5'
+    # base_path_MRI = '../MRI_Aligned/'
+    # base_path_GT = '../GT_Aligned/'
+    # base_path_SURF = '../SURF_Aligned/'
+    # out_file_name = '../preproc_data_augmented/Aligned_Data.hdf5'
 
 
     data_maker = DataMakerSynth(out_file_name, base_path_MRI, base_path_GT, base_path_SURF)

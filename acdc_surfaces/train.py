@@ -754,8 +754,8 @@ def main():
     # Copy experiment config file
     shutil.copy(exp_config.__file__, log_dir)
 
-    # run_training(continue_run, DataPath)
-    run_inference(DataPath)
+    run_training(continue_run, DataPath)
+    # run_inference(DataPath)
 
 if __name__ == '__main__':
     main()

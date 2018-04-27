@@ -30,7 +30,7 @@ keep_probability = 1
 
 # Augmentation settings !!!!!!!!!!!!!!to use augmentation, one needs to augment the vertices correspondingly - write procedures
 augment_batch = False
-do_rotations = True
+do_rotations = False
 do_scaleaug = False
 do_fliplr = False
 

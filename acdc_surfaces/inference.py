@@ -13,18 +13,7 @@ from scipy.io import loadmat
 
 ### EXPERIMENT CONFIG FILE #############################################################
 # Set the config file of the experiment you want to run here:
-
-#from experiments import unet2D_bn_ssd as exp_config
-#from experiments import shallow2D_ssd as exp_config
-#from experiments import FCN8_bn_ssd as exp_config
-#from experiments import PCA_main as exp_config
-from experiments import PCA as exp_config
-#from experiments import CL9_DL1 as exp_config
-#from experiments import CL5_DL3 as exp_config
-#from experiments import CL5_DL1 as exp_config
-#from experiments import CL9_nobias_DL1_nobias as exp_config
-#from experiments import CL9_DL1_UKBB as exp_config
-#from experiments import shallow_CNN_UKBB as exp_config
+from experiments import CL9_DL1_nobias as exp_config
 ########################################################################################
 DATAFILE = '../preproc_data/data_2D_size_212_212_res_1.36719_1.36719_sl_2_5.hdf5'
 SESSION = '../acdc_logdir/CL9_DL1_nobias10Epoch_0.0001LR16Batch1keep0WD/'

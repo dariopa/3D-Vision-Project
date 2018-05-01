@@ -13,7 +13,7 @@ from scipy.io import loadmat
 
 ### EXPERIMENT CONFIG FILE #############################################################
 # Set the config file of the experiment you want to run here:
-from experiments import CL9_DL1_nobias as exp_config
+from experiments import Unaligned_Data as exp_config
 ########################################################################################
 DATAFILE = '../preproc_data_augmented/Unaligned_Data.hdf5'
 SESSION = '../acdc_logdir/CL9_DL1_nobias10Epoch_0.0001LR16Batch1keep0WD/'

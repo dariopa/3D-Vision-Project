@@ -466,123 +466,6 @@ def run_training(continue_run, DataPath):
         sess.close()
     data.close()
 
-
-def run_inference(DataPath):
-    # Load data
-    data_file = DataPath
-    data = h5py.File(data_file, 'r')
-    # the following are HDF5 datasets, not numpy arrays
-    images_val = data['images_val']
-    labels_val = data['labels_val']
-
-    images_test = data['images_test']
-    labels_test = data['labels_test']
-    patientID_test = data['patient_id_test']
-    GT_test = data['GT_test']
-    GT_test = np.reshape(GT_test, (GT_test.shape[0], exp_config.image_size[0], exp_config.image_size[1]))
-
-    with tf.Graph().as_default():
-
-        # Generate placeholders for the images and labels.
-
-        #image_tensor_shape = [exp_config.batch_size] + list(exp_config.image_size) + [1]
-        #mask_tensor_shape = [exp_config.batch_size, 1, exp_config.num_vertices, 2]
-        image_tensor_shape = [None] + list(exp_config.image_size) + [1]
-        mask_tensor_shape = [None, 1, exp_config.num_vertices, 2]
-
-        images_pl = tf.placeholder(tf.float32, shape=image_tensor_shape, name='images')
-        labels_pl = tf.placeholder(tf.float32, shape=mask_tensor_shape, name='labels')
-
-        training_pl = tf.placeholder(tf.bool, shape=[])
-
-        # Build a Graph that computes predictions from the inference model.
-        logits = model.inference(images_pl, exp_config, training=training_pl)
-
-        # Add the variable initializer Op.
-        init = tf.global_variables_initializer()
-
-        saver = tf.train.Saver()
-
-        # Create a session for running Ops on the Graph.
-        sess = tf.Session()
-
-        # Run the Op to initialize the variables.
-        sess.run(init)
-
-        saver.restore(sess, tf.train.latest_checkpoint('acdc_logdir/shallow2D_ssd1500Epoch_0.0001LR5Batch/'))
-
-        images_test = np.expand_dims(images_test, axis=3)
-        print(images_test.shape)
-        pred = sess.run(logits, feed_dict={images_pl: images_test})
-        print(pred.shape)
-        pred = np.squeeze(pred, axis=(1,))
-        print(pred.shape)
-
-        DICEall = np.zeros((images_test.shape[0], 1))
-
-        # save predictions
-        res_path = os.path.join(sys_config.out_data_root, log_dir_name)
-        if not tf.gfile.Exists(res_path):
-            tf.gfile.MakeDirs(res_path)
-        for i in range(pred.shape[0]):
-            res = np.asarray(pred[i, :, :])
-            # print(res)
-
-            # save result
-            outFile = os.path.join(res_path, "pred" + str(i) + ".csv")
-            np.savetxt(outFile, res, delimiter=" ")
-
-            # saveplot
-            outFilePng = os.path.join(res_path, "pred" + str(i) + ".png")
-            # utils.view_plot(res)
-            axis_limits = [0, exp_config.image_size[0], 0, exp_config.image_size[1]]
-            utils.save_plot(res, outFilePng, axis_limits)
-
-            # save intensity image
-            outFileBW = os.path.join(res_path, "pred" + str(i) + "BW.png")
-            outImageBW = images_test[i, :, :, :]
-            print(outImageBW.shape)
-            outImageBW = np.squeeze(outImageBW, axis=(2,))
-            misc.imsave(outFileBW, outImageBW)
-
-            # save GT segmentation
-            outFileGTBW = os.path.join(res_path, "pred" + str(i) + "GTBW.png")
-            outImageGTBW = GT_test[i, :, :]
-            print(outImageGTBW.shape)
-            misc.imsave(outFileGTBW, outImageGTBW)
-
-            # save true label
-            outFileGT = os.path.join(res_path, "pred" + str(i) + "GT.png")
-            print(labels_test.shape)
-            outGT = labels_test[i, :, :]
-
-            utils.save_plot(outGT, outFileGT, axis_limits)
-            utils.save_plot
-
-            # save GT and pred in one plot
-            outFileGTpred = os.path.join(res_path, "pred" + str(i) + "predGT.png")
-            outGT = labels_test[i, :, :]
-
-            utils.save_plot(outGT, outFileGT, axis_limits)
-            # utils.save_plot
-            utils.save_two_plots(outGT, res, outFileGTpred, axis_limits)
-
-            segmentation = utils.create_segmentation(res, exp_config.image_size)
-            # save intensity image
-            outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
-            # print(segmentation)
-            misc.imsave(outFileSegm, segmentation)
-
-            # compute DICE coefficient
-            DICEall[i], _, _, _, _ = utils.computeDICE(segmentation.astype(int), GT_test[i, :, :] / 255)
-            print(i, " ; ", patientID_test[i] ,": ", DICEall[i])
-
-        print("**Global stats**")
-        print("Avg Dice: ", DICEall.mean())
-        print("Std Dice: ", DICEall.std())
-        sess.close()
-    data.close()
-
 def do_eval(sess,
             eval_loss,
             images_placeholder,
@@ -745,7 +628,7 @@ def iterate_minibatches(images, labels, batch_size, augment_batch=False):
 
 
 def main():
-    DataPath = '../preproc_data_augmented/Unaligned_Data.hdf5'
+    DataPath = '../preproc_data_augmented/Aligned_Data.hdf5'
     continue_run = True
     if not tf.gfile.Exists(log_dir):
         tf.gfile.MakeDirs(log_dir)
@@ -755,7 +638,6 @@ def main():
     shutil.copy(exp_config.__file__, log_dir)
 
     run_training(continue_run, DataPath)
-    # run_inference(DataPath)
 
 if __name__ == '__main__':
     main()

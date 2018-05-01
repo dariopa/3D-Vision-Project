@@ -179,8 +179,8 @@ def run_inference():
         print("Std Dice: ", DICEall.std())
 
         with open( os.path.join(res_path, 'Result.csv'), 'w+') as fp:
-        fp.write('Average Dice:,' + str(DICEall.mean()) + '\n')
-        fp.write('Standard Dice:,' + str(DICEall.std()))
+            fp.write('Average Dice:,' + str(DICEall.mean()) + '\n')
+            fp.write('Standard Dice:,' + str(DICEall.std()))
 
         sess.close()
     data.close()

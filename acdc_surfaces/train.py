@@ -26,7 +26,7 @@ import h5py
 ### EXPERIMENT CONFIG FILE #############################################################
 # Set the config file of the experiment you want to run here:
 
-from experiments import Aligned_Data as exp_config
+from experiments import Unaligned_Data as exp_config
 
 ########################################################################################
 
@@ -617,7 +617,7 @@ def iterate_minibatches(images, labels, batch_size, augment_batch=False):
 
 
 def main():
-    DataPath = '../preproc_data_augmented/Aligned_Data.hdf5'
+    DataPath = '../preproc_data_augmented/Unaligned_Data.hdf5'
     continue_run = True
     if not tf.gfile.Exists(log_dir):
         tf.gfile.MakeDirs(log_dir)

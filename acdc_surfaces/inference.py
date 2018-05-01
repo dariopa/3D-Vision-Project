@@ -182,6 +182,11 @@ def run_inference():
         print("**Global stats**")
         print("Avg Dice: ", DICEall.mean())
         print("Std Dice: ", DICEall.std())
+
+        with open(os.path.join(out_data_root,'Results.csv'), 'w+') as fp:
+            fp.write('Average Dice:  ' + ',' + str(DICEall.mean() + '\n'))
+            fp.write('Standard Dice:  ' + ',' + str(DICEall.std()))
+
         sess.close()
     data.close()
 
@@ -191,10 +196,4 @@ def main():
     run_inference()
 
 if __name__ == '__main__':
-
-    # parser = argparse.ArgumentParser(
-    #     description="Train a neural network.")
-    # parser.add_argument("CONFIG_PATH", type=str, help="Path to config file (assuming you are in the working directory)")
-    # args = parser.parse_args()
-
     main()

@@ -26,19 +26,8 @@ import h5py
 ### EXPERIMENT CONFIG FILE #############################################################
 # Set the config file of the experiment you want to run here:
 
-# from experiments import FCN8_bn_wxent as exp_config
-#from experiments import FCN8_bn_ssd as exp_config
-#from experiments import unet2D_bn_ssd as exp_config
-#from experiments import shallow2D_ssd as exp_confiig
-#from experiments import PCA_main as exp_config
-#from experiments import CL9_DL1 as exp_config
-#from experiments import CL9_DL1_UKBB as exp_config
-#from experiments import shallow_CNN_UKBB as exp_config
-#from experiments import shallow_FCN_UKBB as exp_config
-from experiments import CL9_DL1_nobias as exp_config
-#from experiments import CL5_DL3 as exp_config
-#from experiments import bounding_box as exp_config
-#from experiments import PCA as exp_config
+from experiments import Aligned_Data as exp_config
+
 ########################################################################################
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')

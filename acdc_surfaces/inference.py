@@ -15,8 +15,8 @@ from scipy.io import loadmat
 # Set the config file of the experiment you want to run here:
 from experiments import Unaligned_Data as exp_config
 ########################################################################################
-DATAFILE = '../preproc_data_augmented/Unaligned_Data.hdf5'
-SESSION = '../acdc_logdir/Unaligned_Data1000Epoch_0.0001LR5Batch1keep0WD/'
+DATAFILE = '../preproc_data_augmented/Aligned_Data.hdf5'
+SESSION = '../acdc_logdir/Aligned_Data500Epoch_0.0001LR5Batch1keep0WD/'
 
 log_dir_name = SESSION.split("/")[-2]
 

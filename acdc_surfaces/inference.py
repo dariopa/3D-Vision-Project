@@ -17,7 +17,6 @@ from experiments import Unaligned_Data as exp_config
 ########################################################################################
 DATAFILE = '../preproc_data_augmented/Unaligned_Data.hdf5'
 SESSION = '../acdc_logdir/Unaligned_Data1000Epoch_0.0001LR5Batch1keep0WD/'
-#log_dir_name = exp_config.experiment_name + str(exp_config.max_epochs) +'Epoch_' + str(exp_config.learning_rate) + 'LR' + str(exp_config.batch_size) + 'Batch'
 
 log_dir_name = SESSION.split("/")[-2]
 
@@ -121,8 +120,6 @@ def run_inference():
             print(pred.shape)
 
             res = np.squeeze(pred, axis=(0,))
-            #res = np.asarray(pred[i, :, :])
-            # print(res)
 
             # save result
             outFile = os.path.join(res_path, "pred" + str(i) + ".csv")
@@ -167,8 +164,6 @@ def run_inference():
             outOverlay = os.path.join(res_path, "pred" + str(i) + "overlay.png")
             utils.overlay_img_2plots(outGT, res, outImageBW, outOverlay, axis_limits)
 
-
-
             segmentation = utils.create_segmentation(res, exp_config.image_size)
             # # save segmentation image
             # outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
@@ -183,7 +178,7 @@ def run_inference():
         print("Avg Dice: ", DICEall.mean())
         print("Std Dice: ", DICEall.std())
 
-        with open(os.path.join(out_data_root,'Results.csv'), 'w+') as fp:
+        with open(os.path.join(sys_config.out_data_root,'Results.csv'), 'w+') as fp:
             fp.write('Average Dice:  ' + ',' + str(DICEall.mean() + '\n'))
             fp.write('Standard Dice:  ' + ',' + str(DICEall.std()))
 

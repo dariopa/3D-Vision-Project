@@ -13,15 +13,14 @@ from scipy.io import loadmat
 
 ### EXPERIMENT CONFIG FILE #############################################################
 # Set the config file of the experiment you want to run here:
-from experiments import Aligned_Data as exp_config
+from experiments import Unaligned_Data as exp_config
 ########################################################################################
-DATAFILE = '../preproc_data_augmented/Aligned_Data.hdf5'
-SESSION = '../acdc_logdir/Aligned_Data500Epoch_0.0001LR5Batch1keep0WD/'
+DATAFILE = '../preproc_data_augmented/Unaligned_Data.hdf5'
+SESSION = '../acdc_logdir/Unaligned_Data1000Epoch_0.0001LR5Batch1keep0WD/'
 
 log_dir_name = SESSION.split("/")[-2]
 
 log_dir = os.path.join(sys_config.log_root, log_dir_name)
-
 
 def run_inference():
     # Load data

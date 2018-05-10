@@ -1,0 +1,29 @@
+%% LOGIN REMOTE
+ssh dariopa@biwidl102.ethz.ch
+
+%% Path to Folder with code
+exec $SHELL
+cd /scratch_net/biwidl102/dariopa/Models 
+
+
+%% Submitting a job on gpu
+qsub -cwd -l h_vmem=30G -R y Generate_Image.py
+qsub -cwd -l h_vmem=10G -R y Generate_Image.py
+
+% or better
+exec $SHELL
+qrsh -l gpu=1 -l h_vmem=60G -q gpu.long.q@*
+% or
+exec $SHELL
+qrsh -l gpu=1 -l h_vmem=40G -l h_rt=24:00:00 -l hostname=bmicgpu02
+% with
+cd /scratch_net/biwidl102/dariopa_3DVision/3D-Vision-Project/acdc_surfaces/
+exec $SHELL
+export SGE_GPU=`grep -h $(whoami) /tmp/lock-gpu*/info.txt | sed  's/^[^0-9]*//;s/[^0-9].*$//'`
+python inference_aligned.py
+
+
+%% SEND JOB ON MATLAB VIA SHELL
+matlab -nodesktop -nosplash -r "matlab_script;quit;"
+
+-> no file extension needed!

@@ -165,9 +165,9 @@ def run_inference():
 
             segmentation = utils.create_segmentation(res, exp_config.image_size)
             # save segmentation image
-            outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
-            print(segmentation)
-            misc.imsave(outFileSegm, segmentation)
+            # outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
+            # print(segmentation)
+            # misc.imsave(outFileSegm, segmentation)
 
             # compute DICE coefficient
             DICEall[i], _, _, _, _ = utils.computeDICE(segmentation.astype(int), GT_test[i, :, :] / 255)

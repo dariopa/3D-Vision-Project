@@ -168,13 +168,13 @@ def run_inference():
             print(segmentation, '\n')
             ########### DARIO'S CODE #############
             row, col = np.shape(segmentation)
-            print(row)
-            print(col)
             for i in range(row):
                 for j in range(col):
                     if segmentation[i,j] == False:
+                        print('I am here!')
                         segmentation[i,j] = 0
                     elif segmentation[i,j] == True:
+                        print('I am here as well!!!!')
                         segmentation[i,j] = 1
             print(segmentation)
             ######################################

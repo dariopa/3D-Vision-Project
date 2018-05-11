@@ -172,7 +172,7 @@ def run_inference():
             misc.imsave(outFileSegm, segmentation)
 
             # compute DICE coefficient
-            DICEall[i], _, _, _, _ = utils.computeDICE(segmentation, GT_test[i, :, :] / 255)
+            DICEall[i], _, _, _, _ = utils.computeDICE(segmentation, GT_test[i, :, :] / 255.)
             print(i, " ; ", patientID_test[i] ,": ", DICEall[i])
 
         print("**Global stats**")

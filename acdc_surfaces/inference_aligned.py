@@ -166,21 +166,17 @@ def run_inference():
             # save segmentation image
             segmentation = utils.create_segmentation(res, exp_config.image_size)
             print(segmentation, '\n')
+
             ########### DARIO'S CODE #############
-            # row, col = np.shape(segmentation)
-            # segmentation_int = np.full((row, col), 0.)
-            # for i in range(row):
-            #     for j in range(col):
-            #         if segmentation[i,j] == True:
-            #             segmentation_int[i,j] = 1.
             segmentation = segmentation.astype(int)
-            print(segmentation)
+            print(segmentation, '\n')
             ######################################
+
             outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
-            misc.imsave(outFileSegm, segmentation_int)
+            misc.imsave(outFileSegm, segmentation)
 
             # compute DICE coefficient
-            DICEall[i], _, _, _, _ = utils.computeDICE(segmentation.astype(int), GT_test[i, :, :] / 255)
+            DICEall[i], _, _, _, _ = utils.computeDICE(segmentation, GT_test[i, :, :] / 255)
             print(i, " ; ", patientID_test[i] ,": ", DICEall[i])
 
         print("**Global stats**")
@@ -189,7 +185,7 @@ def run_inference():
 
         with open( os.path.join(res_path, 'Result.csv'), 'w+') as fp:
             fp.write('Average Dice:,' + str(DICEall.mean()) + '\n')
-            fp.write('Standard Dice:,' + str(DICEall.std()))
+            fp.write('Standard Dice:,' + str(DICEall.std()) + '\n')
 
         sess.close()
     data.close()

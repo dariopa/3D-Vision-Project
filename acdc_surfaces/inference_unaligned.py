@@ -163,14 +163,18 @@ def run_inference():
             outOverlay = os.path.join(res_path, "pred" + str(i) + "overlay.png")
             utils.overlay_img_2plots(outGT, res, outImageBW, outOverlay, axis_limits)
 
-            segmentation = utils.create_segmentation(res, exp_config.image_size)
             # save segmentation image
-            # outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
-            # print(segmentation)
-            # misc.imsave(outFileSegm, segmentation)
+            segmentation = utils.create_segmentation(res, exp_config.image_size)
+            print(segmentation, '\n')
+            ########### DARIO'S CODE #############
+            segmentation = segmentation.astype(int)
+            print(segmentation, '\n')
+            ######################################
+            outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
+            misc.imsave(outFileSegm, segmentation)
 
             # compute DICE coefficient
-            DICEall[i], _, _, _, _ = utils.computeDICE(segmentation.astype(int), GT_test[i, :, :] / 255)
+            DICEall[i], _, _, _, _ = utils.computeDICE(segmentation, GT_test[i, :, :] / 255)
             print(i, " ; ", patientID_test[i] ,": ", DICEall[i])
 
         print("**Global stats**")
@@ -179,7 +183,7 @@ def run_inference():
 
         with open( os.path.join(res_path, 'Result.csv'), 'w+') as fp:
             fp.write('Average Dice:,' + str(DICEall.mean()) + '\n')
-            fp.write('Standard Dice:,' + str(DICEall.std()))
+            fp.write('Standard Dice:,' + str(DICEall.std()) + '\n')
 
         sess.close()
     data.close()

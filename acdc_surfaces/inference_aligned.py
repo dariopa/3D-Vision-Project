@@ -167,9 +167,9 @@ def run_inference():
             segmentation = utils.create_segmentation(res, exp_config.image_size)
             print(segmentation, '\n')
             ########### DARIO'S CODE #############
-            segmentation = np.asarray(segmentation)
             row, col = np.shape(segmentation)
-            print(np.shape, '\n')
+            print(row)
+            print(col)
             for i in range(row):
                 for j in range(col):
                     if segmentation[i,j] == False:

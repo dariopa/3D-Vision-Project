@@ -165,13 +165,9 @@ def run_inference():
 
             # save segmentation image
             segmentation = utils.create_segmentation(res, exp_config.image_size)
-            print(segmentation, '\n')
-
             ########### DARIO'S CODE #############
             segmentation = segmentation.astype(int)
-            print(segmentation, '\n')
             ######################################
-
             outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
             misc.imsave(outFileSegm, segmentation)
 

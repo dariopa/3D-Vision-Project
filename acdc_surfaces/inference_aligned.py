@@ -167,20 +167,20 @@ def run_inference():
             segmentation = utils.create_segmentation(res, exp_config.image_size)
             print(segmentation, '\n')
             ########### DARIO'S CODE #############
-            row, col = np.shape(segmentation)
-            segmentation_int = np.full((row, col), 0.)
-            for i in range(row):
-                for j in range(col):
-                    if segmentation[i,j] == True:
-                        print('I am here well!!!!')
-                        segmentation_int[i,j] = 1.
-            print(segmentation_int)
+            # row, col = np.shape(segmentation)
+            # segmentation_int = np.full((row, col), 0.)
+            # for i in range(row):
+            #     for j in range(col):
+            #         if segmentation[i,j] == True:
+            #             segmentation_int[i,j] = 1.
+            segmentation = segmentation.astype(int)
+            print(segmentation)
             ######################################
             outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
             misc.imsave(outFileSegm, segmentation_int)
 
             # compute DICE coefficient
-            DICEall[i], _, _, _, _ = utils.computeDICE(segmentation_int.astype(int), GT_test[i, :, :] / 255)
+            DICEall[i], _, _, _, _ = utils.computeDICE(segmentation.astype(int), GT_test[i, :, :] / 255)
             print(i, " ; ", patientID_test[i] ,": ", DICEall[i])
 
         print("**Global stats**")

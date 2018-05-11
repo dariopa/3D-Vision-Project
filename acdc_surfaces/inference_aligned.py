@@ -168,8 +168,14 @@ def run_inference():
             print(segmentation, '\n')
             ########### DARIO'S CODE #############
             segmentation = np.asarray(segmentation)
-            segmentation[segmentation is False] = 0
-            segmentation[segmentation is True] = 1
+            row, col = np.shape(segmentation)
+            print(np.shape, '\n')
+            for i in range(row):
+                for j in range(col):
+                    if segmentation[i,j] == False:
+                        segmentation[i,j] = 0
+                    elif segmentation[i,j] == True:
+                        segmentation[i,j] = 1
             print(segmentation)
             ######################################
             outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")

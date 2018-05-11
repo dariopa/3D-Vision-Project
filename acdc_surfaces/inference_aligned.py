@@ -163,8 +163,9 @@ def run_inference():
             outOverlay = os.path.join(res_path, "pred" + str(i) + "overlay.png")
             utils.overlay_img_2plots(outGT, res, outImageBW, outOverlay, axis_limits)
 
-            segmentation = utils.create_segmentation(res, exp_config.image_size)
             # save segmentation image
+            segmentation = utils.create_segmentation(res, exp_config.image_size)
+            segmentation = np.asarray(segmentation)
             outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
             print(segmentation)
             misc.imsave(outFileSegm, segmentation)

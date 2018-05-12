@@ -114,67 +114,57 @@ def run_inference():
                 pred = sess.run(logits, feed_dict={images_pl: np.expand_dims(images_test[i, :, :, :], axis=0), PCA_U_pl: PCA_U, PCA_mean_pl: PCA_mean, PCA_sqrtsigma_pl: PCA_sqrtsigma})
             else:
                 pred = sess.run(logits, feed_dict={images_pl: np.expand_dims(images_test[i, :, :, :], axis=0)})
-            print(pred.shape)
+            
             pred = np.squeeze(pred, axis=(1,))
-            print(pred.shape)
 
             res = np.squeeze(pred, axis=(0,))
 
             # save result
-            outFile = os.path.join(res_path, "pred" + str(i) + ".csv")
+            outFile = os.path.join(res_path, "pred_" + str(i) + ".csv")
             np.savetxt(outFile, res, delimiter=" ")
 
             # saveplot
-            outFilePng = os.path.join(res_path, "pred" + str(i) + ".png")
+            outFilePng = os.path.join(res_path, "pred_" + str(i) + ".png")
             # utils.view_plot(res)
             axis_limits = [0, exp_config.image_size[0], 0, exp_config.image_size[1]]
             utils.save_plot(res, outFilePng, axis_limits)
 
-            # save intensity image
-            outFileBW = os.path.join(res_path, "pred" + str(i) + "BW.png")
-            outImageBW = images_test[i, :, :, :]
-            print(outImageBW.shape)
-            outImageBW = np.squeeze(outImageBW, axis=(2,))
-            misc.imsave(outFileBW, outImageBW)
-
-            # save GT segmentation
-            outFileGTBW = os.path.join(res_path, "pred" + str(i) + "GTBW.png")
-            outImageGTBW = GT_test[i, :, :]
-            print(outImageGTBW.shape)
-            misc.imsave(outFileGTBW, outImageGTBW)
-
             # save true label
-            outFileGT = os.path.join(res_path, "pred" + str(i) + "GT.png")
-            print(labels_test.shape)
+            outFileGT = os.path.join(res_path, "labels_" + str(i) + "_GT.png")
+            print('Shape of labels:   ', labels_test.shape)
             outGT = labels_test[i, :, :]
-
             utils.save_plot(outGT, outFileGT, axis_limits)
             utils.save_plot
 
-            # save GT and pred in one plot
-            outFileGTpred = os.path.join(res_path, "pred" + str(i) + "predGT.png")
-            outGT = labels_test[i, :, :]
+            # save intensity image
+            outFileBW = os.path.join(res_path, "pred_" + str(i) + "_BW.png")
+            outImageBW = images_test[i, :, :, :]
+            print('Shape of MRI image:   ', outImageBW.shape)
+            outImageBW = np.squeeze(outImageBW, axis=(2,))
+            misc.imsave(outFileBW, outImageBW)
 
+            # save GT labels and pred in one plot
+            outFileGTpred = os.path.join(res_path, "pred_" + str(i) + "_labels_GT.png")
             utils.save_plot(outGT, outFileGT, axis_limits)
-            # utils.save_plot
             utils.save_two_plots(outGT, res, outFileGTpred, axis_limits)
 
             # save overlay plot
-            outOverlay = os.path.join(res_path, "pred" + str(i) + "overlay.png")
+            outOverlay = os.path.join(res_path, "pred_" + str(i) + "_overlay.png")
             utils.overlay_img_2plots(outGT, res, outImageBW, outOverlay, axis_limits)
 
-            # save segmentation image
-            segmentation = utils.create_segmentation(res, exp_config.image_size)
-            ########### DARIO'S CODE #############
-            segmentation = segmentation.astype(int)
-            ######################################
-            outFileSegm = os.path.join(res_path, "pred" + str(i) + "segm.png")
-            misc.imsave(outFileSegm, segmentation)
+            # save segmentation image, predicted labels and original labels
+            segmentation_pred = (utils.create_segmentation(res, exp_config.image_size)).astype(int)
+            segmentation_labels = (utils.create_segmentation(outGT, exp_config.image_size)).astype(int)
+            print('Shape of segmented original labels:   ', segmentation_labels.shape)
+            print('Shape of segmented predicted labels:   ', segmentation_pred.shape)
+
+            outFileGTBW = os.path.join(res_path, "pred_" + str(i) + "_GTBW.png")
+            misc.imsave(outFileGTBW, segmentation_labels)
+            outFileSegm = os.path.join(res_path, "pred_" + str(i) + "_segm.png")
+            misc.imsave(outFileSegm, segmentation_pred)
 
             # compute DICE coefficient
-            GT_image = GT_test[i, :, :] / 255
-            GT_image[GT_image < 1] = 0
-            DICEall[i], _, _, _, _ = utils.computeDICE(segmentation, GT_image)
+            DICEall[i], _, _, _, _ = utils.computeDICE(segmentation_pred, segmentation_labels)
             print(i, " ; ", patientID_test[i] ,": ", DICEall[i])
 
         print("**Global stats**")

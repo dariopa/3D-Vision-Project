@@ -130,7 +130,7 @@ def run_inference():
             utils.save_plot(res, outFilePng, axis_limits)
 
             # save true label
-            outFileGT = os.path.join(res_path, "pred_orig_" + str(i) + "_GT.png")
+            outFileGT = os.path.join(res_path, "pred_" + str(i) + "_GT.png")
             print('Shape of labels:   ', labels_test.shape)
             outGT = labels_test[i, :, :]
             utils.save_plot(outGT, outFileGT, axis_limits)

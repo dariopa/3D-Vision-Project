@@ -1,1 +1,0 @@
-Before switching from aligned to unaligned, make sure you change the path "out_data_root"!

@@ -5,14 +5,9 @@ ssh dariopa@biwidl102.ethz.ch
 exec $SHELL
 cd /scratch_net/biwidl102/dariopa_3DVision/3D-Vision-Project/acdc_surfaces/
 
-
-%% Submitting a job on gpu
-qsub -cwd -l h_vmem=30G -R y Generate_Image.py
-qsub -cwd -l h_vmem=10G -R y Generate_Image.py
-
 % or better
 exec $SHELL
-qrsh -l gpu=1 -l h_vmem=60G -q gpu.long.q@*
+qrsh -l gpu=1 -l h_vmem=40G -q gpu.middle.q@*
 % or
 exec $SHELL
 qrsh -l gpu=1 -l h_vmem=40G -q gpu.short.q@*

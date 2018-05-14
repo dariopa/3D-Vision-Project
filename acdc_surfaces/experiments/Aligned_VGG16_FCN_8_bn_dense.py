@@ -3,7 +3,7 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 
-experiment_name = 'Aligned_Data_VGG16_FCN_8_bn_dense_'
+experiment_name = 'Aligned_VGG16_FCN_8_bn_dense_'
 
 # Model settings
 model_handle = model_zoo.VGG16_FCN_8_bn_dense

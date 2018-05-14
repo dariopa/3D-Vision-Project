@@ -3,10 +3,10 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 
-experiment_name = 'Aligned_unet2D_bn_padding_same_modified_'
+experiment_name = 'Aligned_CL5_DL3_'
 
 # Model settings
-model_handle = model_zoo.unet2D_bn_padding_same_modified
+model_handle = model_zoo.CL5_DL3
 
 # Data settings
 data_mode = '2D'  # 2D or 3D

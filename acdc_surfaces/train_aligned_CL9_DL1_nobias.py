@@ -26,7 +26,7 @@ import h5py
 ### EXPERIMENT CONFIG FILE #############################################################
 # Set the config file of the experiment you want to run here:
 
-from experiments import Aligned_Data as exp_config
+from experiments import Aligned_CL9_DL1_nobias as exp_config
 
 ########################################################################################
 

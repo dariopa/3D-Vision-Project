@@ -19,7 +19,7 @@ local_hostnames = ['bmicdl03']  # used to check if on cluster or not
 
 ##################################################################################
 
-log_root = os.path.join(project_root, 'acdc_logdir/')
+log_root = os.path.join(project_root, '/scratch_net/biwidl103/dariopa/acdc_logdir/')
 if not os.path.isdir(log_root):
     os.makedirs(log_root)
 out_data_root = os.path.join(project_root, 'Prediction_Data/')

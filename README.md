@@ -1,3 +1,4 @@
+0) pip install -r requirements.txt in the folder acdc_surfaces
 1) First, run acdc_data.py in the folder acdc_surfaces -> will generate data to import into matlab
 2) Run Unaligned_MRI.m
 3) Run Unaligned_SURF.m

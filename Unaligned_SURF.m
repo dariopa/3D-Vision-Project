@@ -5,7 +5,7 @@ clear;	% Delete all variables.
 close all;	% Close all figure windows except those created by imtool.
 
 %% Add library for Snakes-Toolbox
-addpath(genpath('snakes'));
+addpath(genpath('Toolbox/snakes'));
 
 %% Distance threshold
 thresh = 2;

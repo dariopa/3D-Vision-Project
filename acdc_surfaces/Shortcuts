@@ -3,7 +3,7 @@ ssh dariopa@biwidl102.ethz.ch
 
 %% Path to Folder with code
 exec $SHELL
-cd /scratch_net/biwidl102/dariopa_3DVision/3D-Vision-Project/acdc_surfaces/
+cd /scratch_net/biwidl103/dariopa/3D-Vision-Project/acdc_surfaces/
 
 % or better
 exec $SHELL
@@ -13,22 +13,22 @@ exec $SHELL
 qrsh -l gpu=1 -l h_vmem=40G -q gpu.short.q@*
 
 % with
-cd /scratch_net/biwidl102/dariopa_3DVision/3D-Vision-Project/acdc_surfaces/
+cd /scratch_net/biwidl103/dariopa/3D-Vision-Project/acdc_surfaces/
 exec $SHELL
 export SGE_GPU=`grep -h $(whoami) /tmp/lock-gpu*/info.txt | sed  's/^[^0-9]*//;s/[^0-9].*$//'`
 python inference_aligned.py
 % or
-cd /scratch_net/biwidl102/dariopa_3DVision/3D-Vision-Project/acdc_surfaces/
+cd /scratch_net/biwidl103/dariopa/3D-Vision-Project/acdc_surfaces/
 exec $SHELL
 export SGE_GPU=`grep -h $(whoami) /tmp/lock-gpu*/info.txt | sed  's/^[^0-9]*//;s/[^0-9].*$//'`
 python inference_unaligned.py
 % or
-cd /scratch_net/biwidl102/dariopa_3DVision/3D-Vision-Project/acdc_surfaces/
+cd /scratch_net/biwidl103/dariopa/3D-Vision-Project/acdc_surfaces/
 exec $SHELL
 export SGE_GPU=`grep -h $(whoami) /tmp/lock-gpu*/info.txt | sed  's/^[^0-9]*//;s/[^0-9].*$//'`
 python train_aligned.py
 % or
-cd /scratch_net/biwidl102/dariopa_3DVision/3D-Vision-Project/acdc_surfaces/
+cd /scratch_net/biwidl103/dariopa/3D-Vision-Project/acdc_surfaces/
 exec $SHELL
 export SGE_GPU=`grep -h $(whoami) /tmp/lock-gpu*/info.txt | sed  's/^[^0-9]*//;s/[^0-9].*$//'`
 python train_unaligned.py

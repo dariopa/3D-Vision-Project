@@ -3,6 +3,7 @@
 /.idea/
 /*_Unaligned/
 /*_Aligned/
+/*_Aligned_cropped/
 /Link*
 /__pycache__/
 /preproc*

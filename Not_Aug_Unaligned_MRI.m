@@ -98,4 +98,4 @@ for i = 1:export_size
         imwrite(png_data,pngName);
     end
 end
-disp("done.")
+disp('Job terminated!')

@@ -102,3 +102,4 @@ for k = 1:length(Files_GT)
         close all;
     end
 end
+disp('Job terminated!')

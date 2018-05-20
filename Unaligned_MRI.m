@@ -92,3 +92,5 @@ pngName = strcat(pngPath,'image', num2str(i), '_GT.png');
 png_data = MASKS(:,:,i)*ScalingFactor;
 imwrite(png_data,pngName);
 end
+
+disp('Job terminated!')

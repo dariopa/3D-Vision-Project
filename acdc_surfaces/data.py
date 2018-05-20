@@ -76,10 +76,16 @@ if __name__ == '__main__':
     # out_file_name = '../preproc_data_augmented/Unaligned_Data.hdf5'
 
 # Aligned data
-    base_path_MRI = '../MRI_Aligned/'
-    base_path_GT = '../GT_Aligned/'
-    base_path_SURF = '../SURF_Aligned/'
-    out_file_name = '../preproc_data_augmented/Aligned_Data.hdf5'
+    # base_path_MRI = '../MRI_Aligned/'
+    # base_path_GT = '../GT_Aligned/'
+    # base_path_SURF = '../SURF_Aligned/'
+    # out_file_name = '../preproc_data_augmented/Aligned_Data.hdf5'
+
+# Aligned data cropped
+    base_path_MRI = '../MRI_Aligned_cropped/'
+    base_path_GT = '../GT_Aligned_cropped/'
+    base_path_SURF = '../SURF_Aligned_cropped/'
+    out_file_name = '../preproc_data_augmented/Aligned_Data_cropped.hdf5'
 
 
     data_maker = DataMakerSynth(out_file_name, base_path_MRI, base_path_GT, base_path_SURF)

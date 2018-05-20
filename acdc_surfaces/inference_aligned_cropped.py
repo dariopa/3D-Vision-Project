@@ -14,14 +14,9 @@ from scipy.io import loadmat
 ### EXPERIMENT CONFIG FILE #############################################################
 # Set the config file of the experiment you want to run here:
 from experiments import Aligned_cropped_CL9_DL1_nobias as exp_config
-
 ########################################################################################
 DATAFILE = '../preproc_data_augmented/Aligned_Data_cropped.hdf5'
-# SESSION = '../acdc_logdir/Aligned_CL5_DL1_200Epoch_0.0001LR5Batch1keep0WD/'
-# SESSION = '../acdc_logdir/Aligned_CL5_DL3_200Epoch_0.0001LR5Batch1keep0WD/'
-# SESSION = '../acdc_logdir/Aligned_CL9_DL1_200Epoch_0.0001LR5Batch1keep0WD/'
-SESSION = '../acdc_logdir/Aligned_cropped_CL9_DL1_nobias_200Epoch_0.0001LR5Batch1keep0WD/'
-# SESSION = '../acdc_logdir/Aligned_CL9_nobias_DL1_nobias_200Epoch_0.0001LR5Batch1keep0WD/'
+SESSION = '../acdc_logdir/Aligned_cropped_CL9_DL1_nobias_200Epoch_0.0001LR3Batch1keep0WD/'
 
 log_dir_name = SESSION.split("/")[-2]
 

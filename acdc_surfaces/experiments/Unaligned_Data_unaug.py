@@ -3,7 +3,7 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 
-experiment_name = 'Unaligned_Data_'
+experiment_name = 'Unaligned_Data_unaug_'
 
 # Model settings
 model_handle = model_zoo.CL9_DL1_nobias

@@ -82,10 +82,22 @@ if __name__ == '__main__':
     # out_file_name = '../preproc_data_augmented/Aligned_Data.hdf5'
 
 # Aligned data cropped
-    base_path_MRI = '../MRI_Aligned_cropped/'
-    base_path_GT = '../GT_Aligned_cropped/'
-    base_path_SURF = '../SURF_Aligned_cropped/'
-    out_file_name = '../preproc_data_augmented/Aligned_Data_cropped.hdf5'
+    # base_path_MRI = '../MRI_Aligned_cropped/'
+    # base_path_GT = '../GT_Aligned_cropped/'
+    # base_path_SURF = '../SURF_Aligned_cropped/'
+    # out_file_name = '../preproc_data_augmented/Aligned_Data_cropped.hdf5'
+
+# Unaligned data, not augmented
+    base_path_MRI = '../Not_Aug_MRI_Unaligned/'
+    base_path_GT = '../Not_Aug_GT_Unaligned/'
+    base_path_SURF = '../Not_Aug_SURF_Unaligned/'
+    out_file_name = '../preproc_data_augmented/Unaligned_Data_unaug.hdf5'
+
+# Aligned data, not augmented
+    # base_path_MRI = '../Not_Aug_MRI_Aligned/'
+    # base_path_GT = '../Not_Aug_GT_Aligned/'
+    # base_path_SURF = '../Not_Aug_SURF_Aligned/'
+    # out_file_name = '../preproc_data_augmented/Aligned_Data_unaug.hdf5'
 
 
     data_maker = DataMakerSynth(out_file_name, base_path_MRI, base_path_GT, base_path_SURF)

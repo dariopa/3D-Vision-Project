@@ -25,7 +25,7 @@ python inference_aligned.py
 cd /scratch_net/biwidl103/dariopa/3D-Vision-Project/acdc_surfaces/
 exec $SHELL
 export SGE_GPU=`grep -h $(whoami) /tmp/lock-gpu*/info.txt | sed  's/^[^0-9]*//;s/[^0-9].*$//'`
-python train_aligned.py
+python train_aligned_CL9_DL1_nobias.py
 
 
 %% SEND JOB ON MATLAB VIA SHELL

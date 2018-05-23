@@ -173,12 +173,12 @@ def run_inference():
         print("**Global stats**")
         print("Avg Dice: ", DICEall.mean())
         print("Std Dice: ", DICEall.std())
-        print("MSE: ", MSE_tot.mean())
+        print("MSE: ", np.mean(MSE_tot))
 
         with open( os.path.join(res_path, 'Result.csv'), 'w+') as fp:
             fp.write('Average Dice:,' + str(DICEall.mean()) + '\n')
             fp.write('Standard Dice:,' + str(DICEall.std()) + '\n')
-            fp.write('Mean Squared Error:,' + str(MSE_tot.mean()) + '\n')
+            fp.write('Mean Squared Error:,' + str(np.mean(MSE_tot)) + '\n')
 
         sess.close()
     data.close()

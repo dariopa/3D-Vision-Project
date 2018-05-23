@@ -18,7 +18,7 @@ start_slice = 2
 end_slice = 5
 
 # Training settings
-batch_size = 16
+batch_size = 64
 learning_rate = 0.0001
 optimizer_handle = tf.train.AdamOptimizer
 schedule_lr = False

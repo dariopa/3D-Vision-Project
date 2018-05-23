@@ -5,7 +5,7 @@ ssh dariopa@biwidl102.ethz.ch
 exec $SHELL
 cd /scratch_net/biwidl103/dariopa/3D-Vision-Project/acdc_surfaces/
 
-% or better
+%% login to biwirender
 exec $SHELL
 qrsh -l gpu=1 -l h_vmem=40G -q gpu.middle.q@*
 % or

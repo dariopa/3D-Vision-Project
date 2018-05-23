@@ -167,8 +167,8 @@ def run_inference():
             MSE = []
             for i in range(len(res)):
                 MSE.append((outGT[i, 0] - res[i, 0])**2 + (outGT[i, 1] - res[i, 1])**2) 
-            MSE_tot.append(np.mean(MSE))
-            print("MSE: ", np.mean(MSE), '\n')
+            MSE_tot.append(np.sum(MSE))
+            print("MSE: ", np.sum(MSE), '\n')
 
         print("**Global stats**")
         print("Avg Dice: ", DICEall.mean())

@@ -103,6 +103,7 @@ def run_inference():
 
 
         DICEall = np.zeros((images_test.shape[0], 1))
+        MSE_tot = []
 
         # save predictions
         res_path = os.path.join(sys_config.out_data_root, log_dir_name)
@@ -131,7 +132,6 @@ def run_inference():
 
             # save true label
             outFileGT = os.path.join(res_path, "pred_" + str(i) + "_GT.png")
-            print('Shape of labels:   ', labels_test.shape)
             outGT = labels_test[i, :, :]
             utils.save_plot(outGT, outFileGT, axis_limits)
             utils.save_plot
@@ -139,7 +139,6 @@ def run_inference():
             # save intensity image
             outFileBW = os.path.join(res_path, "pred_" + str(i) + "_BW.png")
             outImageBW = images_test[i, :, :, :]
-            print('Shape of MRI image:   ', outImageBW.shape)
             outImageBW = np.squeeze(outImageBW, axis=(2,))
             misc.imsave(outFileBW, outImageBW)
 
@@ -155,9 +154,6 @@ def run_inference():
             # save segmentation image, predicted labels and original labels
             segmentation_pred = (utils.create_segmentation(res, exp_config.image_size)).astype(int)
             segmentation_labels = (utils.create_segmentation(outGT, exp_config.image_size)).astype(int)
-            print('Shape of segmented original labels:   ', segmentation_labels.shape)
-            print('Shape of segmented predicted labels:   ', segmentation_pred.shape)
-
             outFileGTBW = os.path.join(res_path, "pred_" + str(i) + "_GTBW.png")
             misc.imsave(outFileGTBW, segmentation_labels)
             outFileSegm = os.path.join(res_path, "pred_" + str(i) + "_segm.png")
@@ -165,15 +161,26 @@ def run_inference():
 
             # compute DICE coefficient
             DICEall[i], _, _, _, _ = utils.computeDICE(segmentation_pred, segmentation_labels)
-            print(i, " ; ", patientID_test[i] ,": ", DICEall[i])
+            print(i, " ; ", patientID_test[i] ,": ", DICEall[i], '\n')
+
+            # calculate Mean squared error of vertices
+            print(res) # predictions
+            print(outGT) # labels
+            MSE = []
+            for i in range(len(res)):
+                MSE.append((outGT[i, 0] - res[i, 0])**2 + (outGT[i, 1] - res[i, 1])**2) 
+            MSE_tot.append(np.mean(MSE))
+            print(np.mean(MSE))
 
         print("**Global stats**")
         print("Avg Dice: ", DICEall.mean())
         print("Std Dice: ", DICEall.std())
+        print("MSE: ", MSE_tot.mean())
 
         with open( os.path.join(res_path, 'Result.csv'), 'w+') as fp:
             fp.write('Average Dice:,' + str(DICEall.mean()) + '\n')
             fp.write('Standard Dice:,' + str(DICEall.std()) + '\n')
+            fp.write('Mean Squared Error:,' + str(MSE_tot.mean()) + '\n')
 
         sess.close()
     data.close()

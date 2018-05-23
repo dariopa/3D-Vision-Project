@@ -164,13 +164,13 @@ def run_inference():
             print(i, " ; ", patientID_test[i] ,": ", DICEall[i], '\n')
 
             # calculate Mean squared error of vertices
-            print(res) # predictions
-            print(outGT) # labels
+            print(res.shape) # predictions
+            print(outGT.shape) # labels
             MSE = []
             for i in range(len(res)):
                 MSE.append((outGT[i, 0] - res[i, 0])**2 + (outGT[i, 1] - res[i, 1])**2) 
             MSE_tot.append(np.mean(MSE))
-            print(np.mean(MSE))
+            print("MSE: ", np.mean(MSE))
 
         print("**Global stats**")
         print("Avg Dice: ", DICEall.mean())

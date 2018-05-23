@@ -33,8 +33,6 @@ def run_inference():
     images_test = data['images_test']
     labels_test = data['labels_test']
 
-
-
     patientID_test = data['patient_id_test']
     GT_test = data['GT_train']
     GT_test = np.reshape(GT_test, (GT_test.shape[0], exp_config.image_size[0], exp_config.image_size[1]))
@@ -57,14 +55,6 @@ def run_inference():
     with tf.Graph().as_default():
 
         # Generate placeholders for the images and labels.
-
-        #image_tensor_shape = [exp_config.batch_size] + list(exp_config.image_size) + [1]
-        #mask_tensor_shape = [exp_config.batch_size, 1, exp_config.num_vertices, 2]
-        #image_tensor_shape = [None] + list(exp_config.image_size) + [1]
-        #mask_tensor_shape = [None, 1, exp_config.num_vertices, 2]
-
-        #image_tensor_shape = [num_samples] + list(exp_config.image_size) + [1]
-        #mask_tensor_shape = [num_samples, 1, exp_config.num_vertices, 2]
         image_tensor_shape = [1] + list(exp_config.image_size) + [1]
         mask_tensor_shape = [1, 1, exp_config.num_vertices, 2]
 

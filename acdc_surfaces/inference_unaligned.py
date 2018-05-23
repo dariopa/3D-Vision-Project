@@ -161,16 +161,14 @@ def run_inference():
 
             # compute DICE coefficient
             DICEall[i], _, _, _, _ = utils.computeDICE(segmentation_pred, segmentation_labels)
-            print(i, " ; ", patientID_test[i] ,": ", DICEall[i], '\n')
+            print(i, " ; ", patientID_test[i] ,": ", DICEall[i])
 
             # calculate Mean squared error of vertices
-            print(res.shape) # predictions
-            print(outGT.shape) # labels
             MSE = []
             for i in range(len(res)):
                 MSE.append((outGT[i, 0] - res[i, 0])**2 + (outGT[i, 1] - res[i, 1])**2) 
             MSE_tot.append(np.mean(MSE))
-            print("MSE: ", np.mean(MSE))
+            print("MSE: ", np.mean(MSE), '\n')
 
         print("**Global stats**")
         print("Avg Dice: ", DICEall.mean())

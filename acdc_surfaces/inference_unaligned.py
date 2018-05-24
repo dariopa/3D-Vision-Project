@@ -16,7 +16,7 @@ from scipy.io import loadmat
 from experiments import Unaligned_Data as exp_config
 ########################################################################################
 DATAFILE = '../preproc_data_augmented/Unaligned_Data.hdf5'
-SESSION = '../acdc_logdir/Unaligned_CL9_DL1_nobias_200Epoch_0.0001LR5Batch1keep0WD/'
+SESSION = '../acdc_logdir/Unaligned_CL9_DL1_nobias_80Epoch_0.0001LR5Batch1keep0WD/'
 
 log_dir_name = SESSION.split("/")[-2]
 

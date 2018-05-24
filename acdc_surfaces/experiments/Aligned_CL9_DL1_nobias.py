@@ -18,7 +18,7 @@ start_slice = 2
 end_slice = 5
 
 # Training settings
-batch_size = 1
+batch_size = 5
 learning_rate = 0.0001
 optimizer_handle = tf.train.AdamOptimizer
 schedule_lr = False
@@ -36,7 +36,7 @@ do_fliplr = False
 
 # Rarely changed settings
 use_data_fraction = False  # Should normally be False
-max_epochs = 200
+max_epochs = 80
 schedule_gradient_threshold = 0.00001  # When the gradient of the learning curve is smaller than this value the LR will
                                        # be reduced
 

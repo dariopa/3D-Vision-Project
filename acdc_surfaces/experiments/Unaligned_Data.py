@@ -3,10 +3,10 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = os.environ['SGE_GPU']
 import tensorflow as tf
 
-experiment_name = 'Unaligned_CL9_DL1_nobias_'
+experiment_name = 'Unaligned_CL9_DL1_'
 
 # Model settings
-model_handle = model_zoo.CL9_DL1_nobias
+model_handle = model_zoo.CL9_DL1
 
 # Data settings
 data_mode = '2D'  # 2D or 3D
@@ -36,7 +36,7 @@ do_fliplr = False
 
 # Rarely changed settings
 use_data_fraction = False  # Should normally be False
-max_epochs = 80
+max_epochs = 200
 schedule_gradient_threshold = 0.00001  # When the gradient of the learning curve is smaller than this value the LR will
                                        # be reduced
 

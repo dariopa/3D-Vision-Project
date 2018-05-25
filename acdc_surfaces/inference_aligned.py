@@ -22,7 +22,7 @@ from experiments import Aligned_CL9_nobias_DL1_nobias as exp_config
 DATAFILE = '../preproc_data_augmented/Aligned_Data.hdf5'
 # SESSION = '../acdc_logdir/Aligned_CL9_DL1_200Epoch_0.0001LR5Batch1keep0WD/'
 # SESSION = '../acdc_logdir/Aligned_CL9_DL1_nobias_80Epoch_0.0001LR5Batch1keep0WD/'
-SESSION = '../acdc_logdir/Aligned_CL9_nobias_DL1_nobias_200Epoch_0.0001LR5Batch1keep0WD/'
+SESSION = '../acdc_logdir/Aligned_CL9_nobias_DL1_nobias_200Epoch_0.0001LR1Batch1keep0WD/'
 # SESSION = '../acdc_logdir/Aligned_CL5_DL1_200Epoch_0.0001LR5Batch1keep0WD/'
 # SESSION = '../acdc_logdir/Aligned_CL5_DL3_200Epoch_0.0001LR5Batch1keep0WD/'
 

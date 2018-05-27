@@ -16,7 +16,7 @@ from scipy.io import loadmat
 from experiments import Aligned_unaug_CL9_DL1_nobias as exp_config
 ########################################################################################
 DATAFILE = '../preproc_data_augmented/Aligned_Data_unaug.hdf5'
-SESSION = '../acdc_logdir/Aligned_unaug_CL9_DL1_nobias_200Epoch_0.0001LR5Batch1keep0WD/'
+SESSION = '../acdc_logdir/Aligned_unaug_CL9_DL1_200Epoch_0.0001LR5Batch1keep0WD/'
 
 log_dir_name = SESSION.split("/")[-2]
 

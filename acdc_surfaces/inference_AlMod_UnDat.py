@@ -18,7 +18,7 @@ from experiments import Unaligned_Data as exp_config
 DATAFILE = '../preproc_data_augmented/Unaligned_Data.hdf5'
 SESSION = '../acdc_logdir/Aligned_CL9_DL1_200Epoch_0.0001LR5Batch1keep0WD/'
 
-log_dir_name = '/AlMod_UnDat_CL9_DL1_200Epoch_0.0001LR5Batch1keep0WD/'
+log_dir_name = '/AlMod_UnDat_CL9_DL1_200Epoch_0.0001LR5Batch1keep0WD'
 
 log_dir = os.path.join(sys_config.log_root, log_dir_name)
 

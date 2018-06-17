@@ -55,12 +55,15 @@ The cardiac segmentation challenge and the data is described in detail [here](ht
 
 ## How to run the code from your computer:
 1) Open the `config/system.py` and edit all the paths there to match your system.
-2) First, type ```python acdc_data.py``` in the folder acdc_surfaces. This will generate a .hdf5-file. Edit all the paths to match your system (line 478 to 479).
+2) First, type ```python acdc_data.py``` in the folder `acdc_surfaces`. This will generate a .hdf5-file.
 3) Run Unaligned_MRI.m on Matlab. You can also type ``` matlab -nodesktop -nosplash -r "Unaligned_MRI;quit;" ``` in your shell. 
 4) Run Unaligned_SURF.m on Matlab. You can also type ``` matlab -nodesktop -nosplash -r "Unaligned_SURF;quit;" ``` in your shell. 
 5) Run Aligned_all.m on Matlab. You can also type ``` matlab -nodesktop -nosplash -r "Aligned_all;quit;" ``` in your shell. 
-6) Type ```python data.py``` in folder acdc_surfaces. This will generate a new .hdf5-file with data ready to be fed in the network. Make sure the paths match your system (line 72 - 100). 
+6) Type ```python data.py``` in folder `acdc_surfaces`. This will generate a new .hdf5-file with data ready to be fed in the network. Make sure the paths match the dataset you want to analyse (line 72 - 100). 
 7) Open the `experiments/Aligned_*.py`, select the experiment you want to run, adapt the parameters and save the file. Example: `experiments/Aligned_CL9_DL1.py`
 7) Now you can open start your training by typing ``` python train_*.py```. Example: ``` python train_aligned_CL9_DL1.py```. Make sure you comment line 10 (SGE_GPU environmental variable) if you run your code locally and not on a GPU. 
+
+WARNING: When you run the code on CPU, you need around 12 GB of RAM. Make sure your system is up to the task. If not you can try reducing the batch size, or simplifying the network. 
+
 7) run ```python inference_*.py```. Example: ```python inference_aligned.py```. Make sure you edited your parameters correctly (line 15 to line 27). 
 8) Go in the folder `Prediction_Data`. There you will find your results. 

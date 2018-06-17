@@ -1,3 +1,4 @@
+%% This code extracts MRI and GT images from the .hdf5-file and stores them as .mat and .png files, respectively. 
 close all;
 clear all;
 clc;

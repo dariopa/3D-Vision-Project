@@ -1,6 +1,11 @@
 # 3D Vision Project: Surface Reconstruction in Medical Imaging: Data and CNNs
 This repository contains code (Matlab) to preprocess MRI images for cardiac segmentation networks and a training framework (Python) proposed by Baumgarnter et al. which is publicly available on github. 
 
+Authors:
+- Dario Panzuto ([email](mailto:dario.panzuto@gmail.com))
+- Cornel Frigoli ([email](mailto:cfrigoli@ethz.ch))
+- Michelle Woon ([email](mailto:woonmi@ethz.ch))
+
 The original framework is available by typing
 
 ``` git clone https://github.com/baumgach/acdc_segmenter.git ```

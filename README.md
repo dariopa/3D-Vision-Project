@@ -1,5 +1,5 @@
 # 3D Vision Project: Surface Reconstruction in Medical Imaging: Data and CNNs
-This repository contains code (Matlab) to preprocess MRI images for cardiac segmentation networks and a training framework proposed by Baumgarnter et al. which is publicly available on github. 
+This repository contains code (Matlab) to preprocess MRI images for cardiac segmentation networks and a training framework (Python) proposed by Baumgarnter et al. which is publicly available on github. 
 
 The original framework is available by typing
 
@@ -9,9 +9,15 @@ To clone our repository, type
 
 ``` git clone https://github.com/dariopa/3D-Vision-Project.git```
 
+## Requirements 
+
+- Python 3.4 (also tested with 3.6.3)
+- Tensorflow >= 1.0 (tested with 1.1.0, and 1.2.0)
+- The remainder of the requirements are given in `requirements.txt`
+
 ## Installing required Python packages
 
-Create an environment with Python 3.4. If you use virutalenv it 
+Create an environment with Python 3.6. If you use virutalenv it 
 might be necessary to first upgrade pip (``` pip install --upgrade pip ```).
 
 Next, install the required packages listed in the `requirements.txt` file:
@@ -31,20 +37,30 @@ trouble on our local machines, so we couldn't test this version yet.
 WARNING: Installing tensorflow before the requirements.txt will lead to weird errors while compiling `scikit-image` in `pip install -r requirements`. Make sure you install tensorflow *after* the requirements. 
 If you run into errors anyways try running `pip install --upgrade cython` and then reruning `pip install -r requirements.txt`. 
 
+## Known issues
+
+- If `pip install -r requirements.txt` fails while compiling `scikit-image`, try the following:
+    - Make sure you install `tensorflow` _after_ the `requirements.txt`
+    - If that didn't solve the issue, try running `pip install --upgrade cython` seperately, and then run `pip install -r requirements.txt` again.
+     
+- There seems to be an issue compiling scikit-image when using Python 3.5. If this is happening make sure you are using Python 3.4. 
 
 ## Download the ACDC challenge data
 
 If you don't have access to the data already you can sign up and download it from this [webpage](http://acdc.creatis.insa-lyon.fr/#challenges).
 
+Store the data in a folder called ``` Data ```. Check that the path is implemented correctly in the code-files. 
+
 The cardiac segmentation challenge and the data is described in detail [here](https://www.creatis.insa-lyon.fr/Challenge/acdc/index.html).
 
-## How to run the code:
-
-0) pip install -r requirements.txt in the folder acdc_surfaces
-1) First, run acdc_data.py in the folder acdc_surfaces -> will generate data to import into matlab
-2) Run Unaligned_MRI.m
-3) Run Unaligned_SURF.m
-4) Run Aligned_all.m
-5) Run data.py in folder acdc_surfaces -> will generate data to import into NN
-6) run train_*.py
-7) run inference_*.py -> final score 
+## How to run the code from your computer:
+1) Open the `config/system.py` and edit all the paths there to match your system.
+2) First, type ```python acdc_data.py``` in the folder acdc_surfaces. This will generate a .hdf5-file. Edit all the paths to match your system (line 478 to 479).
+3) Run Unaligned_MRI.m on Matlab. You can also type ``` matlab -nodesktop -nosplash -r "Unaligned_MRI;quit;" ``` in your shell. 
+4) Run Unaligned_SURF.m on Matlab. You can also type ``` matlab -nodesktop -nosplash -r "Unaligned_SURF;quit;" ``` in your shell. 
+5) Run Aligned_all.m on Matlab. You can also type ``` matlab -nodesktop -nosplash -r "Aligned_all;quit;" ``` in your shell. 
+6) Type ```python data.py``` in folder acdc_surfaces. This will generate a new .hdf5-file with data ready to be fed in the network. Make sure the paths match your system (line 72 - 100). 
+7) Open the `experiments/Aligned_*.py`, select the experiment you want to run, adapt the parameters and save the file. Example: `experiments/Aligned_CL9_DL1.py`
+7) Now you can open start your training by typing ``` python train_*.py```. Example: ``` python train_aligned_CL9_DL1.py```. Make sure you comment line 10 (SGE_GPU environmental variable) if you run your code locally and not on a GPU. 
+7) run ```python inference_*.py```. Example: ```python inference_aligned.py```. Make sure you edited your parameters correctly (line 15 to line 27). 
+8) Go in the folder `Prediction_Data`. There you will find your results. 
